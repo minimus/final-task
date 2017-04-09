@@ -1,0 +1,151 @@
+body {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+a:link {
+  text-decoration: none;
+  color: #4864ed;
+}
+
+a:visited {
+  color: #4864ed;
+}
+
+a:hover {
+  color: #ed5050;
+}
+
+#main {
+  display: grid;
+  grid-template-rows: auto auto auto;
+  grid-template-areas: 'header' 'main' 'footer';
+}
+header {
+  /*grid-area: header;*/
+  grid-row: 1 / 2;
+  grid-column: 1;
+  border-bottom: 1px solid #dedede;
+}
+
+div#logo {
+  /*margin: 10px 0 10px 20px;*/
+  display: inline-block;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#root {
+  /*grid-area: main;*/
+  grid-row: 2 / 3;
+  grid-column: 1;
+}
+
+#root h1 {
+  text-align: center;
+}
+
+footer {
+  color: #ffffff;
+  font-size: 16px;
+  background: #3b3b3b;
+  padding: 10px;
+  /*grid-area: footer;*/
+  grid-row: 3 / 4;
+  grid-column: 1;
+}
+
+#info, #copyright {
+  margin: 10px;
+}
+
+#copyright {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+#copyright a:link, #copyright a:visited {
+  text-decoration: none;
+  color: #9fa2fb;
+}
+
+#copyright a:hover {
+  color: #be3131;
+}
+
+#offers {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.offer-item {
+  width: 240px;
+  height: 390px;
+  border: 1px solid #aeaeae;
+  border-radius: 5px;
+  background: #f9f9f9;
+  padding: 10px;
+  margin: 10px;
+  display: grid;
+  grid-template-columns: 60px 60px 60px 60px;
+  grid-template-rows: 250px 100px 40px;
+  /*grid-template-areas: "image image image image" "title title title title" ". . price price";*/
+  box-shadow: 0 0 5px 0 #b1afaf;
+}
+
+.offer-item:hover {
+  background: #dbdaf7;
+}
+
+.offer-item .offer-image {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  /*grid-area: image;*/
+  grid-row: 1 / 2;
+  grid-column: 1 / 5;
+}
+
+.offer-item img {
+  width: auto;
+  height: auto;
+  max-width: 236px;
+  max-height: 236px;
+  border: 1px solid #aeaeae;
+}
+
+.offer-name {
+  font-size: 20px;
+  /*grid-area: title;*/
+  grid-row: 2 / 3;
+  grid-column: 1 / 5;
+}
+
+.price {
+  font-size: 30px;
+  font-weight: 400;
+  /*grid-area: price;*/
+  grid-row: 3 / 4;
+  grid-column: 3 / 5;
+  text-align: end;
+  color: #be3131;
+}
+
+.price::after {
+  content: 'руб.';
+  font-size: 20px;
+  font-weight: 400;
+  color: black;
+}
