@@ -1,4 +1,4 @@
-Brest RollingScopes Final Task
+Brest Rolling Scopes Final Task
 ==============================
 
 Demo: https://minimus-final-task.herokuapp.com/
