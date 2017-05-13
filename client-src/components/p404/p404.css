@@ -1,0 +1,28 @@
+.p404 {
+  margin: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.p404-content {
+  max-width: 450px;
+}
+
+a.to-home-page {
+  display: inline-block;
+  background: #1574ad;
+  color: #fff;
+  padding: 7px 10px;
+  border-radius: 3px;
+  margin: 5px 0;
+}
+
+a.to-home-page:link, a.to-home-page:visited {
+  color: #ffffff;
+}
+
+a.to-home-page:hover {
+  color: #fffec9;
+}

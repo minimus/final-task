@@ -1,0 +1,11 @@
+#sort-order-pane {
+  text-align: right;
+  margin: 10px 20px;
+}
+
+#sort-order-pane select {
+  height: 25px;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 16px;
+  margin: 0 0 0 10px;
+}

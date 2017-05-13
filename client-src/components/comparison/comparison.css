@@ -1,0 +1,128 @@
+.comparison-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.comparison-body h1 {
+  margin: 50px;
+}
+
+.comparison-table {
+  display: table;
+  margin: 10px;
+}
+
+.comparison-caption {
+  display: table-row;
+}
+
+.comparison-caption .comparison-caption-cell {
+  display: table-cell;
+  padding: 5px;
+}
+
+.comparison-caption-cell .caption-cell {
+  display: grid;
+  grid-template-columns: 250px;
+  grid-template-rows: 250px 80px 50px 50px;
+  grid-row-gap: 10px;
+  justify-items: center;
+  max-width: 250px;
+  margin: 10px;
+  padding: 10px;
+}
+
+.image-cell .item-image img,
+.comparison-caption .caption-cell .item-image img {
+  max-width: 230px;
+  max-height: 230px;
+}
+
+.price-item {
+  font-size: 30px;
+  font-weight: 400;
+  text-align: end;
+  color: #be3131;
+}
+
+.price-item::after {
+  content: '\440\443\431.';
+  font-size: 20px;
+  font-weight: 400;
+  color: black;
+}
+
+.purchase-button a {
+  display: block;
+  padding: 10px 45px;
+  background: #1574ad;
+  border-radius: 2px;
+}
+
+.purchase-button a:link,
+.purchase-button a:hover,
+.purchase-button a:visited {
+  color: #ffffff;
+}
+
+.tech-info-row {
+  display: table-row;
+}
+
+.tech-info-row:nth-child(even) {
+  background: rgba(21, 116, 173, 0.05);
+}
+
+.tech-info-cell {
+  display: table-cell;
+  font-size: 15px;
+  padding: 5px;
+  max-width: 250px;
+}
+
+.tech-info-cell.info-caption {
+  color: #1574AD;
+  max-width: 270px;
+}
+
+.tech-info-cell.info-not-found .material-icons {
+  color: #be3131;
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+.tech-info-cell.info-undefined .material-icons {
+  color: #f5ab20;
+  vertical-align: middle;
+}
+
+.images-row,
+.header-row,
+.price-row,
+.purchase-row {
+  display: table-row;
+}
+
+.images-row .image-cell,
+.header-row .header-cell,
+.price-row .price-cell,
+.purchase-row .footer-cell {
+  display: table-cell;
+  max-width: 230px;
+  padding: 0 10px;
+}
+
+.images-row .image-cell .item-image,
+.price-row .price-cell .price-item-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.purchase-row .footer-cell .purchase-button {
+  display: flex;
+  padding: 15px 5px;
+  flex-direction: column;
+  align-items: center;
+}

@@ -1,0 +1,45 @@
+.pager-container {
+  text-align: center;
+  padding: 10px;
+}
+
+.pager-container a {
+  display: inline-block;
+  border: 1px solid #dedede;
+  border-radius: 3px;
+  min-width: 30px;
+  padding: 3px;
+  font-size: 24px;
+  margin: 2px;
+}
+
+.pager-container a.active {
+  color: red;
+  font-weight: 700;
+}
+
+.pager-container a:hover {
+  background: #dbdaf7;
+}
+
+.pager-container .material-icons {
+  font-weight: bold;
+  vertical-align: middle;
+  padding: 0 0 3px;
+}
+
+#pager-buttons-pane a {
+  padding: 3px 3px 4px 3px;
+}
+
+#pager-first-buttons-pane::after, #pager-last-buttons-pane::before {
+  content: ' ';
+  width: 10px;
+  display: inline-block;
+}
+
+.pager-group-divider {
+  display: inline-block;
+  width: 30px;
+  vertical-align: super;
+}

@@ -1,0 +1,58 @@
+import React from 'react'
+import classNames from 'classnames'
+
+const colors = [
+  {name: "бирюзовый", value: '#40E0D0'},
+  {name: "бронза", value: '#CD7F32'},
+  {name: "светло-зеленый", value: '#90EE90'},
+  {name: "сиреневый", value: '#C8A2C8'},
+  {name: "зеленый", value: '#008000'},
+  {name: "серебристый", value: '#C0C0C0'},
+  {name: "прозрачный", value: '#FFFFFF'},
+  {name: "фуксия", value: '#FF00FF'},
+  {name: "голубой", value: '#87CEFA'},
+  {name: "белый", value: '#FFFFFF'},
+  {name: "серый", value: '#808080'},
+  {name: "темно-серый", value: '#A9A9A9'},
+  {name: "синий", value: '#0000FF'},
+  {name: "розовый", value: '#FFC0CB'},
+  {name: "оливковый", value: '#808000'},
+  {name: "коричневый", value: '#A52A2A'},
+  {name: "бордовый", value: '#5F021F'},
+  {name: "светло-бежевый", value: '#E1C699'},
+  {name: "красный", value: '#FF0000'},
+  {name: "золотой", value: '#FFD700'},
+  {name: "оранжевый", value: '#FFA500'},
+  {name: "серый металлик", value: '#43464B'},
+  {name: "желтый", value: '#FFFF00'},
+  {name: "темно-зеленый", value: '#006400'},
+  {name: "светло-серый", value: '#D3D3D3'},
+  {name: "черный", value: '#000000'},
+  {name: "темно-синий", value: '#00008B'},
+  {name: "светло-розовый", value: '#FFB6C1'},
+  {name: "фиолетовый", value: '#800080'},
+  {name: "бежевый", value: '#F5F5DC'},
+  {name: "светло-коричневый", value: '#B5651D'},
+  {name: "темно-коричневый", value: '#654321'}
+]
+
+export default function ({id, name, value, field, selected, onChange}) {
+  const itemStyle = {
+    background: colors.find(e => e.name === value).value
+  }
+  const classSelected = (selected) ? 'selected' : ''
+  return (
+    <span
+      id={id}
+      className={classNames(classSelected, 'facet-item', 'color-item')}
+      style={itemStyle}
+      title={value}
+      data-field={field}
+      data-name={name}
+      data-value={value}
+      onClick={onChange}
+    >
+      {' '}
+    </span>
+  )
+}

@@ -1,0 +1,36 @@
+#footer-menu {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#footer-menu ul {
+  display: block;
+  margin: 5px;
+  padding: 5px;
+  list-style: none;
+}
+
+#footer-menu ul li {
+  padding: 3px 0;
+}
+
+#footer-menu .home-menu-bar {
+  max-width: 250px;
+}
+
+#footer-menu a.active {
+  color: #f97d7d;
+}
+
+#footer-menu a:visited, #footer-menu a:link {
+  color: #1574ad;
+}
+
+#footer-menu a:hover {
+  color: #be3131;
+}
+
+#info .spinner {
+  width: 50px;
+  margin: 5px;
+}

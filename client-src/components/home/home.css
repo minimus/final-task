@@ -1,0 +1,22 @@
+.home-elements-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 250px 0;
+}
+
+.logo-container {
+  display: flex;
+}
+
+#logo {
+  display: inline-block;
+  margin: 0 0 0 -20px;
+}
+
+.Nav-logo {
+  animation: Nav-logo-spin infinite 20s linear;
+  height: 45px;
+  margin: 5px 0;
+}

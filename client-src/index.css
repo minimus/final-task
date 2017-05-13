@@ -1,0 +1,74 @@
+body {
+  font-family: 'Roboto Condensed', sans-serif;
+  margin: 0;
+}
+
+a:link {
+  text-decoration: none;
+  /*color: #4864ed;*/
+  color: #1574ad;
+}
+
+a:visited {
+  color: #1574ad;
+}
+
+a:hover {
+  color: #ed5050;
+}
+
+article {
+  margin: 93px 0 0 0;
+  min-height: 550px;
+}
+
+#main {
+  display: grid;
+  grid-template-rows: auto auto auto;
+  grid-template-areas: 'header' 'main' 'footer';
+}
+
+#root {
+  /*grid-area: main;*/
+  grid-row: 2 / 3;
+  grid-column: 1;
+}
+
+#root h1 {
+  text-align: center;
+}
+
+footer {
+  color: #ffffff;
+  font-size: 16px;
+  background: #3b3b3b;
+  padding: 10px;
+  /*grid-area: footer;*/
+  grid-row: 3 / 4;
+  grid-column: 1;
+}
+
+#info, #copyright {
+  margin: 10px;
+}
+
+#copyright {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+#copyright a:link, #copyright a:visited {
+  text-decoration: none;
+  color: #9fa2fb;
+}
+
+#copyright a:hover {
+  color: #be3131;
+}
+
+@keyframes Nav-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

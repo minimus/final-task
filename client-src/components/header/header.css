@@ -1,0 +1,31 @@
+header {
+  grid-row: 1 / 2;
+  grid-column: 1;
+  border-bottom: 1px solid #dedede;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav #left-menu:hover {
+  color: #ffffff;
+  background-color: #1574AD;
+}
+
+nav a:link,
+nav a:visited {
+  color: #1574ad;
+}
+
+nav a:hover {
+  color: #be3131;
+}

@@ -1,0 +1,108 @@
+section.search-container {
+  display: flex;
+}
+
+.search-list {
+  width: 100%;
+  padding: 10px;
+}
+
+.search-result-header {
+  margin: 10px;
+  padding: 0 15px;
+}
+
+.search-result-header .search-items-count {
+  font-size: 14px;
+  font-weight: 400;
+  vertical-align: super;
+}
+
+.search-items {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.search-items .search-item {
+  display: flex;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #dedede;
+  border-radius: 3px;
+  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.10);
+}
+
+.search-items .search-item .search-item-body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5px 10px;
+}
+
+.search-items .search-item .image-link {
+  display: block;
+  width: 170px;
+  height: 170px;
+  min-width: 170px;
+  min-height: 170px;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #dedede;
+}
+
+.search-item-image {
+  max-width: 170px;
+  max-height: 170px;
+
+}
+
+.item-main-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.item-description h1 {
+  margin: 7px 0;
+}
+
+.item-price {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px;
+}
+
+.search-item-price {
+  font-size: 30px;
+  padding: 10px;
+  color: #be3131;
+}
+
+.search-item-price::after {
+  content: 'руб';
+  padding: 3px;
+  color: black;
+}
+
+.search-item-info {
+  display: flex;
+  font-size: 14px;
+}
+
+.search-item-info span {
+  padding: 3px 5px;
+}
+
+.search-item-info .material-icons {
+  font-size: 16px;
+  vertical-align: top;
+  padding: 0 3px;
+}
+
+#search-facets {
+  max-width: 350px;
+  min-width: 250px;
+}

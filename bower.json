@@ -1,13 +1,12 @@
 {
-  "name": "final-task",
-  "description": "Final Task",
+  "name": "minimus-final-task",
+  "description": "Rolling Scopes Final Task",
   "main": "",
   "authors": [
     "Konstantin Leonov <minimus@simplelib.com>"
   ],
   "license": "MIT",
   "homepage": "",
-  "private": true,
   "ignore": [
     "**/.*",
     "node_modules",

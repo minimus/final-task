@@ -1,0 +1,258 @@
+.offer-main-pane, .offer-details-pane {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 0 0 20px;
+  border-bottom: 1px solid #dedede;
+}
+
+.offer-main-pane .offer-preview {
+  display: grid;
+  grid-template-columns: 400px;
+  grid-template-rows: 400px 50px;
+  grid-row-gap: 5px;
+  justify-items: center;
+  align-items: center;
+}
+
+.offer-main-pane .image-preview-container {
+  align-self: center;
+  cursor: zoom-in;
+}
+
+.offer-main-pane .image-preview {
+  max-height: 350px;
+  max-width: 350px;
+  margin: 10px;
+}
+
+.offer-main-pane .thumbnails {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.offer-main-pane .thumbnails img {
+  max-width: 35px;
+  max-height: 35px;
+}
+
+.offer-main-pane .thumbnails .thumbnail-container {
+  width: 35px;
+  height: 35px;
+  margin: 5px;
+  text-align: center;
+  border: 1px solid #dedede;
+  cursor: pointer;
+}
+
+.offer-main-pane .thumbnails .thumbnail-container.selected {
+  border: 1px solid #1574AD;
+}
+
+/* Preview dialog */
+
+#preview-dialog {
+  background: white;
+  border: 1px solid #1574AD;
+  position: fixed;
+  width: 85%;
+  height: 85%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 10px 2px rgba(0,0,0,.15);
+  border-radius: 3px;
+}
+
+#preview-dialog #dialog-caption {
+  text-align: right;
+  padding: 5px;
+  background: #1574AD;
+}
+
+#preview-dialog #dialog-caption .close-button {
+  color: #ffffff;
+  cursor: pointer;
+}
+
+#preview-dialog #dialog-inline {
+  height: 100%;
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#preview-dialog .offer-preview {
+  position: absolute;
+  left: 48px;
+  top: 60px;
+  right: 48px;
+  bottom: 60px;
+}
+
+#preview-dialog .image-preview-container {
+  min-height: 100%;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+  font-size: 0;
+}
+
+#preview-dialog .image-preview {
+  max-width: 100%;
+  max-height: 100%;
+  display: inline;
+  vertical-align: middle;
+  background: #fff;
+}
+
+#preview-dialog .thumbnails {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#preview-dialog .thumbnails img {
+  max-width: 35px;
+  max-height: 35px;
+}
+
+#preview-dialog .thumbnails .thumbnail-container {
+  width: 35px;
+  height: 35px;
+  margin: 5px;
+  text-align: center;
+  border: 1px solid #dedede;
+  cursor: pointer;
+}
+
+#preview-dialog .thumbnails .thumbnail-container.selected {
+  border: 1px solid #1574AD;
+}
+
+#preview-dialog #show-right, #preview-dialog #show-left {
+  cursor: pointer;
+}
+
+#major-info {
+  margin: 10px;
+}
+
+#major-info h1 {
+  max-width: 450px;
+}
+
+.info-table {
+  display: table;
+}
+
+.info-row {
+  display: table-row;
+}
+
+#detail-info .info-row:nth-child(even) {
+  background: rgba(21, 116, 173, 0.05);
+}
+
+.info-cell {
+  display: table-cell;
+  padding: 5px;
+  max-width: 300px;
+}
+
+.info-cell.info-key {
+  color: #1574AD;
+  padding: 5px 20px 5px 5px;
+}
+
+#offer-badge-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: stretch;
+  border: 1px solid #dedede;
+  border-radius: 3px;
+  margin: 60px 10px 10px;
+  width: 250px;
+  height: 280px;
+  box-shadow: 0 2px 10px -2px rgba(0,0,0,.15);
+  box-sizing: border-box;
+}
+
+#offer-badge-container .sub-info {
+  font-size: 75%;
+  display: block;
+  margin: 5px 0 0 30px;
+}
+
+#price {
+  font-size: 30px;
+  padding: 10px;
+  color: #1574AD;
+}
+
+#price::after {
+  content: 'руб';
+  padding: 3px;
+  color: black;
+}
+
+.offer-badge-info {
+  padding: 5px 10px;
+}
+
+.offer-badge-info .material-icons {
+  font-size: 20px;
+  vertical-align: bottom;
+  padding: 0 3px;
+}
+
+.offer-badge-info .yes .material-icons {
+  color: green;
+}
+
+.offer-badge-info .not .material-icons {
+  color: red;
+}
+
+#link {
+  color: white;
+  font-size: 25px;
+  text-align: center;
+  background: #1574AD;
+  border-radius: 0 0 3px 3px;
+}
+
+#link a {
+  color: white;
+  display: block;
+  padding: 15px;
+}
+
+#link a:visited {
+  color: white;
+}
+
+#link a:hover {
+  color: #f2fd5c;
+}
+
+#description {
+  max-width: 450px;
+  margin: 0 10px;
+  padding: 10px;
+}
+
+#detail-info {
+  margin: 0 10px;
+  padding: 10px;
+}
+
+#description p {
+  text-align: justify;
+}
+
