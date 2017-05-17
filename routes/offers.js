@@ -1,17 +1,13 @@
-const
-  express = require('express'),
-  router = express.Router(),
-  mongoClient = require('mongodb').MongoClient,
-  assert = require('assert'),
-  mongoUrl = 'mongodb://minimus:Reload1962@ds137230.mlab.com:37230/sinplelib-data';
+const express = require('express');
 
-async function getData(offer) {
-  const db = await mongoClient.connect(mongoUrl);
+const router = express.Router();
+
+async function getData(db, offer) {
   try {
     const goods = db.collection('offers');
     return {
       status: true,
-      data: await goods.findOne({id: offer}, {
+      data: await goods.findOne({ id: offer }, {
         id: 1,
         available: 1,
         url: 1,
@@ -31,28 +27,24 @@ async function getData(offer) {
         country_of_origin: 1,
         weight: 1,
         dimensions: 1,
-        param: 1
-      })
-    }
-  }
-  catch (e) {
-    return Promise.reject(e);
-  }
-  finally {
-    db.close();
+        param: 1,
+      }),
+    };
+  } catch (e) {
+    throw e;
   }
 }
 
 router.get('/:offer', (req, res, next) => {
-  let offer = parseInt(req.params.offer, 10);
-  getData(offer)
+  const db = req.app.locals.db;
+  const offer = parseInt(req.params.offer, 10);
+  getData(db, offer)
     .then(data => res.json(data))
-    //.catch(e => res.json({status: false, error: e}));
-    .catch(e => {
+    .catch((e) => {
       const err = new Error(e);
       err.status = 404;
       next(err);
-    })
+    });
 });
 
 module.exports = router;

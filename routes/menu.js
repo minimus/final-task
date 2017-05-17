@@ -1,44 +1,37 @@
-const
-  express = require('express'),
-  router = express.Router(),
-  mongoClient = require('mongodb').MongoClient,
-  assert = require('assert'),
-  mongoUrl = 'mongodb://minimus:Reload1962@ds137230.mlab.com:37230/sinplelib-data';
+const express = require('express');
 
-async function getMenuData() {
-  const db = await mongoClient.connect(mongoUrl);
+const router = express.Router();
+
+async function getMenuData(db) {
   try {
     const cats = db.collection('categories');
     return await cats.find().toArray();
-  }
-  catch (e) {
-    return Promise.reject(new Error(e));
-  }
-  finally {
-    db.close();
+  } catch (e) {
+    throw e;
   }
 }
 
-function getCats(data, root) {
+function getCats(data, rootNode) {
+  const root = rootNode;
   root.children = [];
-  for (const val of data) {
+  data.forEach((val) => {
     if (val.parentid === root.id) {
       root.children.push(val);
-      getCats(data, val)
+      getCats(data, val);
     }
-  }
+  });
   return root;
 }
 
 router.get('/', (req, res, next) => {
-  getMenuData()
-    .then(data => {
-      const
-        root = {id: 1132530, parentid: 0, keyValue: 'Электроника'},
-        menuObj = getCats(data, root);
+  const db = req.app.locals.db;
+  getMenuData(db)
+    .then((data) => {
+      const root = { id: 1132530, parentid: 0, keyValue: 'Электроника' };
+      const menuObj = getCats(data, root);
       res.json(menuObj);
     })
-    .catch(e => {
+    .catch((e) => {
       const err = new Error(e);
       err.status = 500;
       next(err);

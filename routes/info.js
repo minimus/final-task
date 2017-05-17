@@ -1,126 +1,107 @@
-const
-  express = require('express'),
-  router = express.Router(),
-  mongoClient = require('mongodb').MongoClient,
-  assert = require('assert'),
-  mongoUrl = 'mongodb://minimus:Reload1962@ds137230.mlab.com:37230/sinplelib-data';
+const express = require('express');
+
+const router = express.Router();
 
 function prpareId(id) {
-  return id.split('--').map(e => parseInt(e), 10);
+  return id.split('--').map(e => parseInt(e, 10));
 }
 
-async function getCatData(id) {
-  const db = await mongoClient.connect(mongoUrl);
+async function getCatData(db, id) {
   try {
     const coll = db.collection('categories');
-    return await coll.findOne({id: id});
-  }
-  catch (e) {
-    return Promise.reject(new Error(e));
-  }
-  finally {
-    db.close();
+    return await coll.findOne({ id });
+  } catch (e) {
+    throw e;
   }
 }
 
-async function getOfferData(id) {
-  const db = await mongoClient.connect(mongoUrl);
+async function getOfferData(db, id) {
   try {
     const cats = db.collection('categories');
     const offers = db.collection('offers');
-    const offer = await offers.findOne({id: id}, {categoryid: 1, id: 1, name: 1});
-    return {offer, cat: await cats.findOne({id: offer.categoryid}, {id: 1, keyValue: 1})}
-  }
-  catch (e) {
-    return Promise.reject(new Error(e));
-  }
-  finally {
-    db.close()
+    const offer = await offers.findOne({ id }, { categoryid: 1, id: 1, name: 1 });
+    return { offer, cat: await cats.findOne({ id: offer.categoryid }, { id: 1, keyValue: 1 }) };
+  } catch (e) {
+    throw e;
   }
 }
 
-async function getCompareData(ids) {
-  const db = await mongoClient.connect(mongoUrl);
+async function getCompareData(db, ids) {
   try {
     const cats = db.collection('categories');
     const offers = db.collection('offers');
-    const items = await offers.find({id: {$in: ids}}, {categoryid: 1, id: 1, name: 1}).toArray();
-    return {items, cat: await cats.findOne({id: items[0].categoryid}, {id: 1, keyValue: 1})}
-  }
-  catch (e) {
-    return Promise.reject(new Error(e))
-  }
-  finally {
-    db.close()
+    const items = await offers
+      .find({ id: { $in: ids } }, { categoryid: 1, id: 1, name: 1 })
+      .toArray();
+    return { items, cat: await cats.findOne({ id: items[0].categoryid }, { id: 1, keyValue: 1 }) };
+  } catch (e) {
+    throw e;
   }
 }
 
 router.get('/:item/:id', (req, res, next) => {
-  const
-    item = req.params.item,
-    id = (item === 'comparison') ? prpareId(req.params.id) : parseInt(req.params.id, 10);
+  const db = req.app.locals.db;
+  const item = req.params.item;
+  const id = (item === 'comparison') ? prpareId(req.params.id) : parseInt(req.params.id, 10);
 
   if (item === 'category') {
-    getCatData(id)
+    getCatData(db, id)
       .then(data => res.json({
         category: {
           id: data.id,
           link: `/category/${data.id}/1`,
-          name: data.keyValue
+          name: data.keyValue,
         },
         offer: {
           id: -1,
           link: '',
-          name: ''
-        }
+          name: '',
+        },
       }))
-      .catch(e => {
+      .catch((e) => {
         const err = new Error(e);
         err.status = 404;
         next(err);
-      })
-  }
-  else if (item === 'offer') {
-    getOfferData(id)
+      });
+  } else if (item === 'offer') {
+    getOfferData(db, id)
       .then(data => res.json({
         category: {
           id: data.cat.id,
           link: `/category/${data.cat.id}/1`,
-          name: data.cat.keyValue
+          name: data.cat.keyValue,
         },
         offer: {
           id: data.offer.id,
           link: `/offer/${data.offer.id}`,
-          name: data.offer.name
-        }
+          name: data.offer.name,
+        },
       }))
-      .catch(e => {
+      .catch((e) => {
         const err = new Error(e);
         err.status = 404;
         next(err);
-      })
-  }
-  else if (item === 'comparison') {
-    getCompareData(id)
+      });
+  } else if (item === 'comparison') {
+    getCompareData(db, id)
       .then(data => res.json({
         category: {
           id: data.cat.id,
           link: `/category/${data.cat.id}/1`,
-          name: data.cat.keyValue
+          name: data.cat.keyValue,
         },
         offer: {
           id: id[0],
           link: `/comparison/${id.join('--')}`,
-          name: data.items.map(e => e.name.split(',')[0]).join(' * ')
-        }
+          name: data.items.map(e => e.name.split(',')[0]).join(' * '),
+        },
       }))
-      .catch(e => {
+      .catch((e) => {
         const err = new Error(e);
         err.status = 404;
         next(err);
-      })
-  }
-  else {
+      });
+  } else {
     const err = new Error('Bad input data...');
     err.status = 500;
     next(err);
