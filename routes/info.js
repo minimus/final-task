@@ -7,36 +7,25 @@ function prpareId(id) {
 }
 
 async function getCatData(db, id) {
-  try {
-    const coll = db.collection('categories');
-    return await coll.findOne({ id });
-  } catch (e) {
-    throw e;
-  }
+  const coll = db.collection('categories');
+  const data = await coll.findOne({ id });
+  return data;
 }
 
 async function getOfferData(db, id) {
-  try {
-    const cats = db.collection('categories');
-    const offers = db.collection('offers');
-    const offer = await offers.findOne({ id }, { categoryid: 1, id: 1, name: 1 });
-    return { offer, cat: await cats.findOne({ id: offer.categoryid }, { id: 1, keyValue: 1 }) };
-  } catch (e) {
-    throw e;
-  }
+  const cats = db.collection('categories');
+  const offers = db.collection('offers');
+  const offer = await offers.findOne({ id }, { categoryid: 1, id: 1, name: 1 });
+  return { offer, cat: await cats.findOne({ id: offer.categoryid }, { id: 1, keyValue: 1 }) };
 }
 
 async function getCompareData(db, ids) {
-  try {
-    const cats = db.collection('categories');
-    const offers = db.collection('offers');
-    const items = await offers
+  const cats = db.collection('categories');
+  const offers = db.collection('offers');
+  const items = await offers
       .find({ id: { $in: ids } }, { categoryid: 1, id: 1, name: 1 })
       .toArray();
-    return { items, cat: await cats.findOne({ id: items[0].categoryid }, { id: 1, keyValue: 1 }) };
-  } catch (e) {
-    throw e;
-  }
+  return { items, cat: await cats.findOne({ id: items[0].categoryid }, { id: 1, keyValue: 1 }) };
 }
 
 router.get('/:item/:id', (req, res, next) => {

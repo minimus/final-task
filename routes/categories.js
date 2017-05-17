@@ -95,21 +95,17 @@ async function getData(db, cat, page, offersOnPage, sort, filter) {
     { $group: { _id: '$s', count: { $sum: '$s' } } },
   ];
 
-  try {
-    const goods = db.collection('offers');
-    const cats = db.collection('categories');
-    return {
-      status: true,
-      list: await goods.aggregate(aggregators).toArray(),
-      count: await goods.aggregate(countAggergators).toArray(),
-      page,
-      offersOnPage,
-      categoryId: cat,
-      category: await cats.findOne({ id: cat }),
-    };
-  } catch (e) {
-    throw e;
-  }
+  const goods = db.collection('offers');
+  const cats = db.collection('categories');
+  return {
+    status: true,
+    list: await goods.aggregate(aggregators).toArray(),
+    count: await goods.aggregate(countAggergators).toArray(),
+    page,
+    offersOnPage,
+    categoryId: cat,
+    category: await cats.findOne({ id: cat }),
+  };
 }
 
 router.get('/:category/:page', (req, res, next) => {

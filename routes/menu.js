@@ -3,12 +3,9 @@ const express = require('express');
 const router = express.Router();
 
 async function getMenuData(db) {
-  try {
-    const cats = db.collection('categories');
-    return await cats.find().toArray();
-  } catch (e) {
-    throw e;
-  }
+  const cats = db.collection('categories');
+  const menu = await cats.find().toArray();
+  return menu;
 }
 
 function getCats(data, rootNode) {

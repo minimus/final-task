@@ -91,23 +91,20 @@ async function getData(db, phrase, page, offersOnPage, including, filter) {
     { $project: { _id: 0, facet: '$_id', field: { $literal: 'vendor' }, values: 1 } },
   ];
 
-  try {
-    const goods = db.collection('offers');
-    const cats = db.collection('categories');
-    return {
-      data: await goods.aggregate(aggregator).toArray(),
-      cats: await cats.find({}, { id: 1, keyValue: 1 }).toArray(),
-      count: await goods.aggregate(countAggr).toArray(),
-      facets: await goods.aggregate(facetsAggr).toArray(),
-      vendor: await goods.aggregate(vendorAggr).toArray(),
-      country: await goods.aggregate(countryAggr).toArray(),
-      phrase,
-      page,
-      offersOnPage,
-    };
-  } catch (e) {
-    throw e;
-  }
+
+  const goods = db.collection('offers');
+  const cats = db.collection('categories');
+  return {
+    data: await goods.aggregate(aggregator).toArray(),
+    cats: await cats.find({}, { id: 1, keyValue: 1 }).toArray(),
+    count: await goods.aggregate(countAggr).toArray(),
+    facets: await goods.aggregate(facetsAggr).toArray(),
+    vendor: await goods.aggregate(vendorAggr).toArray(),
+    country: await goods.aggregate(countryAggr).toArray(),
+    phrase,
+    page,
+    offersOnPage,
+  };
 }
 
 router.get('/:phrase/:page', (req, res, next) => {

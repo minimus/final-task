@@ -174,37 +174,33 @@ function prepareFilter(filter) {
 async function getData(db, cat, excluding, filter) {
   const matches = prepareFilter(filter);
 
-  try {
-    const goods = db.collection('offers');
-    return {
-      status: true,
-      data: {
-        facets: await goods.aggregate([
-          { $match: { categoryid: cat } },
-          ...matches,
-          { $unwind: '$param' },
-          { $match: { 'param.name': { $nin: excluding } } },
-          { $group: { _id: '$param.name', values: { $addToSet: '$param.keyValue' } } },
-          { $project: { _id: 0, facet: '$_id', field: { $literal: 'param' }, values: 1 } },
-        ]).toArray(),
-        vendor: await goods.aggregate([
-          { $match: { categoryid: cat } },
-          { $project: { name: { $literal: 'Бренд' }, vendor: 1 } },
-          { $group: { _id: '$name', values: { $addToSet: '$vendor' } } },
-          { $project: { _id: 0, facet: '$_id', field: { $literal: 'vendor' }, values: 1 } },
-        ]).toArray(),
-        country: await goods.aggregate([
-          { $match: { categoryid: cat } },
-          ...matches,
-          { $project: { name: { $literal: 'Страна производства' }, country_of_origin: 1 } },
-          { $group: { _id: '$name', values: { $addToSet: '$country_of_origin' } } },
-          { $project: { _id: 0, facet: '$_id', field: { $literal: 'country_of_origin' }, values: 1 } },
-        ]).toArray(),
-      },
-    };
-  } catch (e) {
-    throw e;
-  }
+  const goods = db.collection('offers');
+  return {
+    status: true,
+    data: {
+      facets: await goods.aggregate([
+        { $match: { categoryid: cat } },
+        ...matches,
+        { $unwind: '$param' },
+        { $match: { 'param.name': { $nin: excluding } } },
+        { $group: { _id: '$param.name', values: { $addToSet: '$param.keyValue' } } },
+        { $project: { _id: 0, facet: '$_id', field: { $literal: 'param' }, values: 1 } },
+      ]).toArray(),
+      vendor: await goods.aggregate([
+        { $match: { categoryid: cat } },
+        { $project: { name: { $literal: 'Бренд' }, vendor: 1 } },
+        { $group: { _id: '$name', values: { $addToSet: '$vendor' } } },
+        { $project: { _id: 0, facet: '$_id', field: { $literal: 'vendor' }, values: 1 } },
+      ]).toArray(),
+      country: await goods.aggregate([
+        { $match: { categoryid: cat } },
+        ...matches,
+        { $project: { name: { $literal: 'Страна производства' }, country_of_origin: 1 } },
+        { $group: { _id: '$name', values: { $addToSet: '$country_of_origin' } } },
+        { $project: { _id: 0, facet: '$_id', field: { $literal: 'country_of_origin' }, values: 1 } },
+      ]).toArray(),
+    },
+  };
 }
 
 router.get('/:category', (req, res, next) => {

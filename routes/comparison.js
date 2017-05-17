@@ -3,16 +3,12 @@ const express = require('express');
 const router = express.Router();
 
 async function getData(db, ids) {
-  try {
-    const goods = db.collection('offers');
-    return {
-      status: true,
-      data: await goods.find({ id: { $in: ids } }).toArray(),
-      params: await goods.distinct('param.name', { id: { $in: ids } }),
-    };
-  } catch (e) {
-    throw e;
-  }
+  const goods = db.collection('offers');
+  return {
+    status: true,
+    data: await goods.find({ id: { $in: ids } }).toArray(),
+    params: await goods.distinct('param.name', { id: { $in: ids } }),
+  };
 }
 
 router.get('/:items', (req, res, next) => {
