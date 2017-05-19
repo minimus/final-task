@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux'
-import thunk from 'redux-thunk';
+import thunk from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import menu from './modules/menu'
 import home from './modules/home'
@@ -14,7 +14,7 @@ const loggerMiddleware = createLogger()
 
 const createStoreWithMiddleware = applyMiddleware(
   thunk,
-  loggerMiddleware
+  loggerMiddleware,
 )(createStore)
 
 const reducer = combineReducers({
@@ -25,7 +25,7 @@ const reducer = combineReducers({
   comparison,
   search,
   searchbar,
-  breadcrumbs
+  breadcrumbs,
 })
 
 export default initialState => createStoreWithMiddleware(reducer, initialState)

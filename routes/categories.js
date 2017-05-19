@@ -1,55 +1,55 @@
-const express = require('express');
+const express = require('express')
 
-const router = express.Router();
+const router = express.Router()
 
 function prepareFilter(filter) {
-  if (!filter) return [];
+  if (!filter) return []
 
-  const filterz = JSON.parse(filter);
+  const filterz = JSON.parse(filter)
 
-  const vendors = [];
-  const countries = [];
-  const params = [];
+  const vendors = []
+  const countries = []
+  const params = []
 
   filterz.forEach((val) => {
     if (val.field === 'vendor') {
-      vendors.push(val.value);
+      vendors.push(val.value)
     } else if (val.field === 'country_of_origin') {
-      countries.push(val.value);
+      countries.push(val.value)
     } else {
-      const idx = params.findIndex(e => e.name === val.name);
-      if (idx === -1) params.push({ name: val.name, values: [val.value] });
-      else params[idx].values.push(val.value);
+      const idx = params.findIndex(e => e.name === val.name)
+      if (idx === -1) params.push({ name: val.name, values: [val.value] })
+      else params[idx].values.push(val.value)
     }
-  });
+  })
 
-  const matches = [];
-  if (vendors.length) matches.push({ $match: { vendor: { $in: vendors } } });
-  if (countries.length) matches.push({ $match: { country_of_origin: { $in: countries } } });
-  params.forEach(param => matches.push({ $match: { $and: [{ 'param.name': param.name }, { 'param.keyValue': { $in: param.values } }] } }));
+  const matches = []
+  if (vendors.length) matches.push({ $match: { vendor: { $in: vendors } } })
+  if (countries.length) matches.push({ $match: { country_of_origin: { $in: countries } } })
+  params.forEach(param => matches.push({ $match: { $and: [{ 'param.name': param.name }, { 'param.keyValue': { $in: param.values } }] } }))
 
-  return matches;
+  return matches
 }
 
 async function getData(db, cat, page, offersOnPage, sort, filter) {
-  const sortOrder = {};
-  const skip = offersOnPage * (page - 1);
+  const sortOrder = {}
+  const skip = offersOnPage * (page - 1)
 
   switch (sort) {
     case 'priceMin':
-      sortOrder.price = 1;
-      break;
+      sortOrder.price = 1
+      break
     case 'priceMax':
-      sortOrder.price = -1;
-      break;
+      sortOrder.price = -1
+      break
     case 'name':
-      sortOrder.name = 1;
-      break;
+      sortOrder.name = 1
+      break
     default:
-      sortOrder.$natural = 1;
+      sortOrder.$natural = 1
   }
 
-  const matches = prepareFilter(filter);
+  const matches = prepareFilter(filter)
 
   const aggregators = [
     {
@@ -72,7 +72,7 @@ async function getData(db, cat, page, offersOnPage, sort, filter) {
     { $sort: sortOrder },
     { $skip: skip },
     { $limit: offersOnPage },
-  ];
+  ]
 
   const countAggergators = [
     {
@@ -93,10 +93,10 @@ async function getData(db, cat, page, offersOnPage, sort, filter) {
     ...matches,
     { $project: { _id: 1, s: { $literal: 1 } } },
     { $group: { _id: '$s', count: { $sum: '$s' } } },
-  ];
+  ]
 
-  const goods = db.collection('offers');
-  const cats = db.collection('categories');
+  const goods = db.collection('offers')
+  const cats = db.collection('categories')
   return {
     status: true,
     list: await goods.aggregate(aggregators).toArray(),
@@ -105,23 +105,23 @@ async function getData(db, cat, page, offersOnPage, sort, filter) {
     offersOnPage,
     categoryId: cat,
     category: await cats.findOne({ id: cat }),
-  };
+  }
 }
 
 router.get('/:category/:page', (req, res, next) => {
-  const db = req.app.locals.db;
-  const offersOnPage = req.app.locals.offersOnPage;
-  const cat = parseInt(req.params.category, 10);
-  const page = parseInt(req.params.page, 10);
-  const sort = req.query.sort;
-  const filter = req.query.filter;
+  const db = req.app.locals.db
+  const offersOnPage = req.app.locals.offersOnPage
+  const cat = parseInt(req.params.category, 10)
+  const page = parseInt(req.params.page, 10)
+  const sort = req.query.sort
+  const filter = req.query.filter
   getData(db, cat, page, offersOnPage, sort, filter)
     .then(data => res.json(data))
     .catch((e) => {
-      const err = new Error(e);
-      err.status = 404;
-      next(err);
-    });
-});
+      const err = new Error(e)
+      err.status = 404
+      next(err)
+    })
+})
 
-module.exports = router;
+module.exports = router

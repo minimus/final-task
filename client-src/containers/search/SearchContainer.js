@@ -1,35 +1,36 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import propTypes from 'prop-types'
 import {
   fetchSearchData,
   facetChanged,
   facetsClearSelected,
-  clearFacets
+  clearFacets,
 } from '../../redux/modules/search'
 import Search from '../../components/search/Search'
-import P404 from "../../components/p404/P404";
+import P404 from '../../components/p404/P404'
 
 class SearchContainer extends Component {
-  componentDidMount = () => {
+  componentDidMount() {
     window.scrollTo(0, 0)
     if (this.props.match.params.phrase) {
       this.props.fetchSearchData(
         this.props.match.params.phrase,
         this.props.match.params.page,
-        this.props.selectedFacets
+        this.props.selectedFacets,
       )
     }
   }
 
-  componentWillReceiveProps = (nextProps) => {
+  componentWillReceiveProps(nextProps) {
     window.scrollTo(0, 0)
     if (nextProps.location.pathname !== this.props.location.pathname ||
       nextProps.selectedFacets.length !== this.props.selectedFacets.length) {
       this.props.fetchSearchData(
         nextProps.match.params.phrase,
         nextProps.match.params.page,
-        nextProps.selectedFacets
+        nextProps.selectedFacets,
       )
     }
 
@@ -39,13 +40,23 @@ class SearchContainer extends Component {
   }
 
   render() {
-    if (this.props.count > 0 && !this.props.data.length && !!this.props.selectedFacets.length)
-      return <Redirect to={`/search/${encodeURIComponent(this.props.match.params.phrase)}/1`}/>
+    if (this.props.count > 0 && !this.props.data.length && !!this.props.selectedFacets.length) { return <Redirect to={`/search/${encodeURIComponent(this.props.match.params.phrase)}/1`} /> }
     if (this.props.notFound) return <P404 />
     return (
-      <Search {...this.props}/>
+      <Search {...this.props} />
     )
   }
+}
+
+SearchContainer.propTypes = {
+  fetchSearchData: propTypes.func.isRequired,
+  clearFacets: propTypes.func.isRequired,
+  data: propTypes.arrayOf(propTypes.object).isRequired,
+  selectedFacets: propTypes.arrayOf(propTypes.object).isRequired,
+  count: propTypes.number.isRequired,
+  notFound: propTypes.bool.isRequired,
+  match: propTypes.objectOf(propTypes.object).isRequired,
+  location: propTypes.objectOf(propTypes.object).isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -59,14 +70,14 @@ const mapStateToProps = state => ({
   offersOnPage: state.search.offersOnPage,
   phrase: state.search.phrase,
   loading: state.search.loading,
-  notFound: state.search.notFound
+  notFound: state.search.notFound,
 })
 
 const mapDispatchToProps = {
   onFacetChange: facetChanged,
   onClear: facetsClearSelected,
   clearFacets,
-  fetchSearchData
+  fetchSearchData,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer)

@@ -1,6 +1,6 @@
-const express = require('express');
+const express = require('express')
 
-const router = express.Router();
+const router = express.Router()
 
 const include = [
   'Страна бренда',
@@ -8,41 +8,41 @@ const include = [
   'Год выпуска',
   'Материал корпуса',
   'Гарантия',
-];
+]
 
 function prepareFilter(filter) {
-  if (!filter) return [];
+  if (!filter) return []
 
-  const filterz = JSON.parse(filter);
+  const filterz = JSON.parse(filter)
 
-  const vendors = [];
-  const countries = [];
-  const params = [];
+  const vendors = []
+  const countries = []
+  const params = []
 
   filterz.forEach((val) => {
     if (val.field === 'vendor') {
-      vendors.push(val.value);
+      vendors.push(val.value)
     } else if (val.field === 'country_of_origin') {
-      countries.push(val.value);
+      countries.push(val.value)
     } else {
-      const idx = params.findIndex(e => e.name === val.name);
-      if (idx === -1) params.push({ name: val.name, values: [val.value] });
-      else params[idx].values.push(val.value);
+      const idx = params.findIndex(e => e.name === val.name)
+      if (idx === -1) params.push({ name: val.name, values: [val.value] })
+      else params[idx].values.push(val.value)
     }
-  });
+  })
 
-  const matches = [];
-  if (vendors.length) matches.push({ $match: { vendor: { $in: vendors } } });
-  if (countries.length) matches.push({ $match: { country_of_origin: { $in: countries } } });
-  params.forEach(param => matches.push({ $match: { $and: [{ 'param.name': param.name }, { 'param.keyValue': { $in: param.values } }] } }));
+  const matches = []
+  if (vendors.length) matches.push({ $match: { vendor: { $in: vendors } } })
+  if (countries.length) matches.push({ $match: { country_of_origin: { $in: countries } } })
+  params.forEach(param => matches.push({ $match: { $and: [{ 'param.name': param.name }, { 'param.keyValue': { $in: param.values } }] } }))
 
-  return matches;
+  return matches
 }
 
 async function getData(db, phrase, page, offersOnPage, including, filter) {
-  const skip = offersOnPage * (page - 1);
+  const skip = offersOnPage * (page - 1)
 
-  const matches = prepareFilter(filter);
+  const matches = prepareFilter(filter)
 
   const aggregator = [
     { $match: { $text: { $search: phrase } } },
@@ -59,13 +59,13 @@ async function getData(db, phrase, page, offersOnPage, including, filter) {
       country_of_origin: 1 } },
     { $skip: skip },
     { $limit: offersOnPage },
-  ];
+  ]
 
   const countAggr = [
     { $match: { $text: { $search: phrase } } },
     ...matches,
     { $group: { _id: null, count: { $sum: 1 } } },
-  ];
+  ]
 
   const facetsAggr = [
     { $match: { $text: { $search: phrase } } },
@@ -74,7 +74,7 @@ async function getData(db, phrase, page, offersOnPage, including, filter) {
     { $match: { 'param.name': { $in: including } } },
     { $group: { _id: '$param.name', values: { $addToSet: '$param.keyValue' } } },
     { $project: { _id: 0, facet: '$_id', field: { $literal: 'param' }, values: 1 } },
-  ];
+  ]
 
   const countryAggr = [
     { $match: { $text: { $search: phrase } } },
@@ -82,18 +82,18 @@ async function getData(db, phrase, page, offersOnPage, including, filter) {
     { $project: { name: { $literal: 'Страна производства' }, country_of_origin: 1 } },
     { $group: { _id: '$name', values: { $addToSet: '$country_of_origin' } } },
     { $project: { _id: 0, facet: '$_id', field: { $literal: 'country_of_origin' }, values: 1 } },
-  ];
+  ]
 
   const vendorAggr = [
     { $match: { $text: { $search: phrase } } },
     { $project: { name: { $literal: 'Бренд' }, vendor: 1 } },
     { $group: { _id: '$name', values: { $addToSet: '$vendor' } } },
     { $project: { _id: 0, facet: '$_id', field: { $literal: 'vendor' }, values: 1 } },
-  ];
+  ]
 
 
-  const goods = db.collection('offers');
-  const cats = db.collection('categories');
+  const goods = db.collection('offers')
+  const cats = db.collection('categories')
   return {
     data: await goods.aggregate(aggregator).toArray(),
     cats: await cats.find({}, { id: 1, keyValue: 1 }).toArray(),
@@ -104,23 +104,23 @@ async function getData(db, phrase, page, offersOnPage, including, filter) {
     phrase,
     page,
     offersOnPage,
-  };
+  }
 }
 
 router.get('/:phrase/:page', (req, res, next) => {
-  const db = req.app.locals.db;
-  const offersOnPage = req.app.locals.offersOnPage;
-  const phrase = decodeURIComponent(req.params.phrase);
-  const page = parseInt(req.params.page, 10);
-  const filter = req.query.filter;
+  const db = req.app.locals.db
+  const offersOnPage = req.app.locals.offersOnPage
+  const phrase = decodeURIComponent(req.params.phrase)
+  const page = parseInt(req.params.page, 10)
+  const filter = req.query.filter
 
   getData(db, phrase, page, offersOnPage, include, filter)
     .then(data => res.json(data))
     .catch((e) => {
-      const err = new Error(e);
-      err.status = 404;
-      next(err);
-    });
-});
+      const err = new Error(e)
+      err.status = 404
+      next(err)
+    })
+})
 
-module.exports = router;
+module.exports = router

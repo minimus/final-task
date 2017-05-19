@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
+import propTypes from 'prop-types'
 import {
   fetchCategoryData,
   orderChanged,
@@ -10,23 +11,24 @@ import {
   clearFacets,
   compareItemSelected,
   compareItemsClear,
-  clearCompare
+  clearCompare,
 } from '../../redux/modules/category'
-import Category from '../../components/category'
-import P404 from "../../components/p404/P404";
+import Category from '../../components/category/Category'
+import P404 from '../../components/p404/P404'
 
 class CategoryContainer extends Component {
 
-  componentDidMount = () => {
-    window.scrollTo(0,0)
-    this.props.fetchCategoryData(this.props.location.pathname, this.props.sort, this.props.selectedFacets)
+  componentDidMount() {
+    window.scrollTo(0, 0)
+    this.props.fetchCategoryData(
+      this.props.location.pathname,
+      this.props.sort,
+      this.props.selectedFacets,
+    )
     this.props.fetchFacetsData(this.props.match.params.category, this.props.selectedFacets)
   }
 
-  componentWillReceiveProps = (nextProps) => {
-    /*if (nextProps.count > 0 && !nextProps.data.length) {
-      nextProps.history.push(`/category/${nextProps.categoryId}/1`)
-    }*/
+  componentWillReceiveProps(nextProps) {
     if (nextProps.match.params.category !== this.props.match.params.category) {
       this.props.clearFacets()
       this.props.clearCompare()
@@ -40,11 +42,11 @@ class CategoryContainer extends Component {
     )
 
     if (categoryDataNeeded) {
-      window.scrollTo(0,0)
+      window.scrollTo(0, 0)
       this.props.fetchCategoryData(
         nextProps.location.pathname,
         nextProps.sort,
-        nextProps.selectedFacets
+        nextProps.selectedFacets,
       )
     }
 
@@ -54,14 +56,28 @@ class CategoryContainer extends Component {
   }
 
   render() {
-    if (this.props.count > 0 && !this.props.data.length && !!this.props.selectedFacets.length)
-      return <Redirect to={`/category/${this.props.categoryId}/1`}/>
+    if (this.props.count > 0 && !this.props.data.length && !!this.props.selectedFacets.length) { return <Redirect to={`/category/${this.props.categoryId}/1`} /> }
     if (this.props.notFound) return <P404 />
     return (
       <Category {...this.props} />
     )
   }
 
+}
+
+CategoryContainer.propTypes = {
+  fetchCategoryData: propTypes.func.isRequired,
+  fetchFacetsData: propTypes.func.isRequired,
+  clearFacets: propTypes.func.isRequired,
+  clearCompare: propTypes.func.isRequired,
+  sort: propTypes.string.isRequired,
+  data: propTypes.arrayOf(propTypes.object).isRequired,
+  selectedFacets: propTypes.arrayOf(propTypes.object).isRequired,
+  count: propTypes.number.isRequired,
+  notFound: propTypes.bool.isRequired,
+  match: propTypes.objectOf(propTypes.object).isRequired,
+  location: propTypes.objectOf(propTypes.object).isRequired,
+  categoryId: propTypes.number.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -78,7 +94,7 @@ const mapStateToProps = state => ({
   notFound: state.category.notFound,
   facets: state.category.facets,
   selectedFacets: state.category.selectedFacets,
-  compareFIFO: state.category.compareFIFO
+  compareFIFO: state.category.compareFIFO,
 })
 
 const mapDispatchToProps = {
@@ -90,7 +106,7 @@ const mapDispatchToProps = {
   fetchCategoryData,
   fetchFacetsData,
   clearFacets,
-  clearCompare
+  clearCompare,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CategoryContainer)

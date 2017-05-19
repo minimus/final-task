@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {fetchOfferData, thumbnailClicked, dialogOpenClicked, dialogCloseClicked, dialogNavClicked} from '../../redux/modules/offer'
+import propTypes from 'prop-types'
+import { fetchOfferData, thumbnailClicked, dialogOpenClicked, dialogCloseClicked, dialogNavClicked } from '../../redux/modules/offer'
 import Offer from '../../components/offer'
-import P404 from "../../components/p404/P404";
+import P404 from '../../components/p404/P404'
 
 class OfferContainer extends Component {
-  componentDidMount = () => {
+  componentDidMount() {
     window.scrollTo(0, 0)
-    return this.props.fetchOfferData(this.props.location.pathname)}
+    return this.props.fetchOfferData(this.props.location.pathname)
+  }
 
-  componentWillReceiveProps = (nextProps) => {
+  componentWillReceiveProps(nextProps) {
     if (nextProps.location.pathname !== this.props.location.pathname) {
       window.scrollTo(0, 0)
       this.props.fetchOfferData(nextProps.location.pathname)
@@ -18,10 +20,16 @@ class OfferContainer extends Component {
 
   render() {
     if (this.props.notFound) return <P404 />
-    return(
+    return (
       <Offer {...this.props} />
     )
   }
+}
+
+OfferContainer.propTypes = {
+  fetchOfferData: propTypes.func.isRequired,
+  notFound: propTypes.bool.isRequired,
+  location: propTypes.objectOf(propTypes.object).isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -32,7 +40,7 @@ const mapStateToProps = state => ({
   info: state.offer.info,
   loading: state.offer.loading,
   dialog: state.offer.dialog,
-  notFound: state.offer.notFound
+  notFound: state.offer.notFound,
 })
 
 const mapDispatchToProps = {
@@ -40,7 +48,7 @@ const mapDispatchToProps = {
   onDialogOpen: dialogOpenClicked,
   onDialogClose: dialogCloseClicked,
   onNavClick: dialogNavClicked,
-  fetchOfferData
+  fetchOfferData,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(OfferContainer)

@@ -1,4 +1,4 @@
-import {prepareFacets} from '../helpers'
+import { prepareFacets } from '../helpers'
 
 const CATEGORY_FETCH_STARTED = 'CATEGORY_FETCH_STARTED'
 const CATEGORY_FETCH_COMPLETED = 'CATEGORY_FETCH_COMPLETED'
@@ -12,7 +12,7 @@ const CATEGORY_COMPARE_CLEARED = 'CATEGORY_COMPARE_CLEARED'
 
 export function fetchCategoryData(cat, sort = 'no', filter = []) {
   return function (dispatch) {
-    dispatch({type: CATEGORY_FETCH_STARTED, payload: {loading: true, notFound: false}})
+    dispatch({ type: CATEGORY_FETCH_STARTED, payload: { loading: true, notFound: false } })
 
     const url = new URL(`/data${cat}/`, window.location.origin)
 
@@ -31,16 +31,16 @@ export function fetchCategoryData(cat, sort = 'no', filter = []) {
           page: data.page,
           offersOnPage: data.offersOnPage,
           loading: false,
-          notFound: (!data.list.length)
-        }
+          notFound: (!data.list.length),
+        },
       }))
-      .catch(e => dispatch({type: CATEGORY_FETCH_COMPLETED, payload: {notFound: true}}))
+      .catch(() => dispatch({ type: CATEGORY_FETCH_COMPLETED, payload: { notFound: true } }))
   }
 }
 
 export function fetchFacetsData(catId, filter = []) {
   return function (dispatch) {
-    dispatch({type: FACETS_FETCH_STARTED, payload: {loading: true, notFound: false}})
+    dispatch({ type: FACETS_FETCH_STARTED, payload: { loading: true, notFound: false } })
 
     const url = new URL(`/data/facets/${catId}/`, window.location.origin)
 
@@ -50,9 +50,9 @@ export function fetchFacetsData(catId, filter = []) {
       .then(data => data.json())
       .then(data => dispatch({
         type: FACETS_FETCH_COMPLETED,
-        payload: {data: data.data, notFound: false}
+        payload: { data: data.data, notFound: false },
       }))
-      .catch(e => dispatch({type: FACETS_FETCH_COMPLETED, payload: {notFound: true}}))
+      .catch(() => dispatch({ type: FACETS_FETCH_COMPLETED, payload: { notFound: true } }))
   }
 }
 
@@ -60,37 +60,36 @@ export function facetChanged(facet) {
   return function (dispatch) {
     const target = facet.currentTarget
     const filterValue = (value) => {
-      if(/^(\-|\+)?([0-9]+(\.[0-9]+)?|Infinity)$/
-          .test(value))
-        return Number(value);
-      return value;
+      if (/^(-|\+)?([0-9]+(\.[0-9]+)?|Infinity)$/
+          .test(value)) { return Number(value) }
+      return value
     }
     dispatch({
       type: CATEGORY_FACET_CHANGED,
       payload: {
         field: target.dataset.field,
         name: target.dataset.name,
-        value: filterValue(target.dataset.value)
-      }
+        value: filterValue(target.dataset.value),
+      },
     })
   }
 }
 
-export function facetsClearSelected(requester) {
+export function facetsClearSelected() {
   return function (dispatch) {
-    dispatch({type: FACETS_CLEAR_SELECTED})
+    dispatch({ type: FACETS_CLEAR_SELECTED })
   }
 }
 
 export function clearFacets() {
   return function (dispatch) {
-    dispatch({type: FACETS_CLEAR_SELECTED})
+    dispatch({ type: FACETS_CLEAR_SELECTED })
   }
 }
 
 export function orderChanged(order) {
   return function (dispatch) {
-    dispatch({type: CATEGORY_SORT_ORDER_CHANGED, payload: order.currentTarget.value})
+    dispatch({ type: CATEGORY_SORT_ORDER_CHANGED, payload: order.currentTarget.value })
   }
 }
 
@@ -98,19 +97,19 @@ export function compareItemSelected(item) {
   return function (dispatch) {
     const target = item.currentTarget
     const itemId = parseInt(target.dataset.id, 10)
-    dispatch({type: CATEGORY_COMPARE_SELECTED, payload: itemId})
+    dispatch({ type: CATEGORY_COMPARE_SELECTED, payload: itemId })
   }
 }
 
-export function compareItemsClear(item) {
+export function compareItemsClear() {
   return function (dispatch) {
-    dispatch({type: CATEGORY_COMPARE_CLEARED})
+    dispatch({ type: CATEGORY_COMPARE_CLEARED })
   }
 }
 
 export function clearCompare() {
   return function (dispatch) {
-    dispatch({type: CATEGORY_COMPARE_CLEARED})
+    dispatch({ type: CATEGORY_COMPARE_CLEARED })
   }
 }
 
@@ -126,42 +125,44 @@ const initialState = {
   notFound: false,
   facets: null,
   selectedFacets: [],
-  compareFIFO: []
+  compareFIFO: [],
 }
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case CATEGORY_FETCH_STARTED:
-      return {...state, loading: action.payload.loading}
-
+      return { ...state, loading: action.payload.loading }
     case CATEGORY_FETCH_COMPLETED:
       return {
         ...state,
         ...action.payload,
-        pages: (!action.payload.notFound) ? Math.ceil(action.payload.count / action.payload.offersOnPage) : 0
+        pages: (!action.payload.notFound) ?
+          Math.ceil(action.payload.count / action.payload.offersOnPage) : 0,
       }
-
     case FACETS_FETCH_STARTED:
-      return {...state, loading: action.payload}
-
+      return { ...state, loading: action.payload }
     case FACETS_FETCH_COMPLETED:
-      return {...state, facets: prepareFacets(action.payload.data), loading: action.payload.loading}
-
-    case CATEGORY_FACET_CHANGED:
+      return {
+        ...state,
+        facets: prepareFacets(action.payload.data),
+        loading: action.payload.loading,
+      }
+    case CATEGORY_FACET_CHANGED: {
       const selFacets = [...state.selectedFacets]
       const idx = selFacets.findIndex(e =>
-        (e.field === action.payload.field && e.name === action.payload.name && e.value === action.payload.value))
+        (e.field === action.payload.field &&
+        e.name === action.payload.name &&
+        e.value === action.payload.value))
       if (idx > -1) selFacets.splice(idx, 1)
       else selFacets.push(action.payload)
-      return {...state, selectedFacets: selFacets}
-
+      return { ...state, selectedFacets: selFacets }
+    }
     case FACETS_CLEAR_SELECTED:
-      return {...state, selectedFacets: []}
-
+      return { ...state, selectedFacets: [] }
     case CATEGORY_SORT_ORDER_CHANGED:
-      return {...state, sort: action.payload}
+      return { ...state, sort: action.payload }
 
-    case CATEGORY_COMPARE_SELECTED:
+    case CATEGORY_COMPARE_SELECTED: {
       const fifo = [...state.compareFIFO]
       const ci = fifo.findIndex(e => e.id === action.payload)
       if (ci === -1) {
@@ -170,16 +171,14 @@ export default function reducer(state = initialState, action) {
           id: action.payload,
           name: cur.name,
           link: `/offer/${cur.id}`,
-          image: (Array.isArray(cur.picture)) ? cur.picture[0] : cur.picture
+          image: (Array.isArray(cur.picture)) ? cur.picture[0] : cur.picture,
         })
-      }
-      else fifo.splice(ci, 1)
+      } else fifo.splice(ci, 1)
       if (fifo.length > 3) fifo.splice(0, 1)
-      return {...state, compareFIFO: fifo}
-
+      return { ...state, compareFIFO: fifo }
+    }
     case CATEGORY_COMPARE_CLEARED:
-      return {...state, compareFIFO: []}
-
+      return { ...state, compareFIFO: [] }
     default:
       return state
   }

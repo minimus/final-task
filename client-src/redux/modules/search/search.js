@@ -1,4 +1,4 @@
-import {prepareFacets} from '../helpers'
+import { prepareFacets } from '../helpers'
 
 const SEARCH_FETCH_STARTED = 'SEARCH_FETCH_STARTED'
 const SEARCH_FETCH_COMPLETED = 'SEARCH_FETCH_COMPLETED'
@@ -9,7 +9,7 @@ const SEARCH_BAR_CHANGED = 'SEARCH_BAR_CHANGED'
 
 export function fetchSearchData(phrase, page, filter = []) {
   return function (dispatch) {
-    dispatch({type: SEARCH_FETCH_STARTED, payload: {loading: true, notFound: false}})
+    dispatch({ type: SEARCH_FETCH_STARTED, payload: { loading: true, notFound: false } })
 
     const url = new URL(`/data/search/${encodeURIComponent(phrase)}/${page}/`, window.location.origin)
 
@@ -28,8 +28,8 @@ export function fetchSearchData(phrase, page, filter = []) {
           offersOnPage: data.offersOnPage,
           phrase: data.phrase,
           loading: false,
-          notFound: false
-        }
+          notFound: false,
+        },
       }))
       .catch(e => dispatch({
         type: SEARCH_FETCH_UNCOMPLETED,
@@ -43,8 +43,8 @@ export function fetchSearchData(phrase, page, filter = []) {
           phrase: '',
           loading: false,
           notFound: true,
-          error: e
-        }
+          error: e,
+        },
       }))
   }
 }
@@ -53,31 +53,30 @@ export function facetChanged(event) {
   return function (dispatch) {
     const target = event.currentTarget
     const filterValue = (value) => {
-      if(/^(\-|\+)?([0-9]+(\.[0-9]+)?|Infinity)$/
-          .test(value))
-        return Number(value);
-      return value;
+      if (/^(-|\+)?([0-9]+(\.[0-9]+)?|Infinity)$/
+          .test(value)) { return Number(value) }
+      return value
     }
     dispatch({
       type: SEARCH_FACET_CHANGED,
       payload: {
         field: target.dataset.field,
         name: target.dataset.name,
-        value: filterValue(target.dataset.value)
-      }
+        value: filterValue(target.dataset.value),
+      },
     })
   }
 }
 
-export function facetsClearSelected(event) {
+export function facetsClearSelected() {
   return function (dispatch) {
-    dispatch({type: SEARCH_FACETS_CLEAR})
+    dispatch({ type: SEARCH_FACETS_CLEAR })
   }
 }
 
 export function clearFacets() {
   return function (dispatch) {
-    dispatch({type: SEARCH_FACETS_CLEAR})
+    dispatch({ type: SEARCH_FACETS_CLEAR })
   }
 }
 
@@ -93,32 +92,42 @@ const initialState = {
   offersOnPage: 0,
   loading: false,
   notFound: false,
-  error: ''
+  error: '',
 }
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SEARCH_FETCH_STARTED:
-      return {...state, ...action.payload}
+      return { ...state, ...action.payload }
+
     case SEARCH_FETCH_COMPLETED:
       return {
         ...state,
         ...action.payload,
-        pages: (!action.payload.notFound) ? Math.ceil(action.payload.count / action.payload.offersOnPage) : 0
+        pages: (!action.payload.notFound) ?
+          Math.ceil(action.payload.count / action.payload.offersOnPage) : 0,
       }
+
     case SEARCH_FETCH_UNCOMPLETED:
-      return {...state, ...action.payload}
-    case SEARCH_FACET_CHANGED:
+      return { ...state, ...action.payload }
+
+    case SEARCH_FACET_CHANGED: {
       const selFacets = [...state.selectedFacets]
       const idx = selFacets.findIndex(e =>
-        (e.field === action.payload.field && e.name === action.payload.name && e.value === action.payload.value))
+        (e.field === action.payload.field &&
+        e.name === action.payload.name &&
+        e.value === action.payload.value))
       if (idx > -1) selFacets.splice(idx, 1)
       else selFacets.push(action.payload)
-      return {...state, selectedFacets: selFacets}
+      return { ...state, selectedFacets: selFacets }
+    }
+
     case SEARCH_FACETS_CLEAR:
-      return {...state, selectedFacets: []}
+      return { ...state, selectedFacets: [] }
+
     case SEARCH_BAR_CHANGED:
-      return {...state, phrase: action.payload}
+      return { ...state, phrase: action.payload }
+
     default:
       return state
   }

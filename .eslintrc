@@ -1,6 +1,23 @@
 {
+  "globals": { "fetch": false, "URL": false, "window": false, "document": false },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
   "extends": "airbnb",
   "rules": {
-    "func-names": ["error", "never"]
-  }
+    "func-names": ["error", "never"],
+    "semi": ["error", "never"],
+    "strict": 0,
+    "babel/new-cap": 0,
+    "babel/no-invalid-this": 1,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+  },
+  "plugins": [
+    "babel"
+  ]
 }

@@ -1,6 +1,6 @@
-const express = require('express');
+const express = require('express')
 
-const router = express.Router();
+const router = express.Router()
 
 const exclude = [
   'Ширина упаковки',
@@ -140,41 +140,41 @@ const exclude = [
   'Тип аксессуара',
   'Страна-изготовитель',
   'Кол-во элементов',
-];
+]
 
 function prepareFilter(filter) {
-  if (!filter) return [];
+  if (!filter) return []
 
-  const filterz = JSON.parse(filter);
+  const filterz = JSON.parse(filter)
 
-  const vendors = [];
-  const countries = [];
-  const params = [];
+  const vendors = []
+  const countries = []
+  const params = []
 
   filterz.forEach((val) => {
     if (val.field === 'vendor') {
-      vendors.push(val.value);
+      vendors.push(val.value)
     } else if (val.field === 'country_of_origin') {
-      countries.push(val.value);
+      countries.push(val.value)
     } else {
-      const idx = params.findIndex(e => e.name === val.name);
-      if (idx === -1) params.push({ name: val.name, values: [val.value] });
-      else params[idx].values.push(val.value);
+      const idx = params.findIndex(e => e.name === val.name)
+      if (idx === -1) params.push({ name: val.name, values: [val.value] })
+      else params[idx].values.push(val.value)
     }
-  });
+  })
 
-  const matches = [];
-  if (vendors.length) matches.push({ $match: { vendor: { $in: vendors } } });
-  if (countries.length) matches.push({ $match: { country_of_origin: { $in: countries } } });
-  params.forEach(param => matches.push({ $match: { $and: [{ 'param.name': param.name }, { 'param.keyValue': { $in: param.values } }] } }));
+  const matches = []
+  if (vendors.length) matches.push({ $match: { vendor: { $in: vendors } } })
+  if (countries.length) matches.push({ $match: { country_of_origin: { $in: countries } } })
+  params.forEach(param => matches.push({ $match: { $and: [{ 'param.name': param.name }, { 'param.keyValue': { $in: param.values } }] } }))
 
-  return matches;
+  return matches
 }
 
 async function getData(db, cat, excluding, filter) {
-  const matches = prepareFilter(filter);
+  const matches = prepareFilter(filter)
 
-  const goods = db.collection('offers');
+  const goods = db.collection('offers')
   return {
     status: true,
     data: {
@@ -200,20 +200,20 @@ async function getData(db, cat, excluding, filter) {
         { $project: { _id: 0, facet: '$_id', field: { $literal: 'country_of_origin' }, values: 1 } },
       ]).toArray(),
     },
-  };
+  }
 }
 
 router.get('/:category', (req, res, next) => {
-  const db = req.app.locals.db;
-  const cat = parseInt(req.params.category, 10);
-  const filter = req.query.filter;
+  const db = req.app.locals.db
+  const cat = parseInt(req.params.category, 10)
+  const filter = req.query.filter
   getData(db, cat, exclude, filter)
     .then(data => res.json(data))
     .catch((e) => {
-      const err = new Error(e);
-      err.status = 404;
-      next(err);
-    });
-});
+      const err = new Error(e)
+      err.status = 404
+      next(err)
+    })
+})
 
-module.exports = router;
+module.exports = router

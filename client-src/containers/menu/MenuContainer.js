@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {fetchMenuData, menuClicked, closeTooltip} from '../../redux/modules/menu'
+import propTypes from 'prop-types'
+import { fetchMenuData, menuClicked, closeTooltip } from '../../redux/modules/menu'
 import NavMenu from '../../components/menu/NavMenu'
 
 class MenuContainer extends Component {
@@ -24,18 +25,29 @@ class MenuContainer extends Component {
   }
 }
 
+MenuContainer.propTypes = {
+  fetchMenuData: propTypes.func.isRequired,
+  menu: propTypes.objectOf(propTypes.object).isRequired,
+  curMenu: propTypes.number.isRequired,
+  prevMenu: propTypes.number.isRequired,
+  shown: propTypes.bool.isRequired,
+  tooltip: propTypes.bool.isRequired,
+  onClick: propTypes.func.isRequired,
+  onTooltipClick: propTypes.func.isRequired,
+}
+
 const mapStateToProps = state => ({
   menu: state.menu.menu,
   shown: state.menu.shown,
   curMenu: state.menu.curMenu,
   prevMenu: state.menu.prevMenu,
-  tooltip: state.menu.tooltip
+  tooltip: state.menu.tooltip,
 })
 
 const mapDispatchToProps = {
   onClick: menuClicked,
   onTooltipClick: closeTooltip,
-  fetchMenuData
+  fetchMenuData,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MenuContainer)

@@ -1,37 +1,37 @@
-const express = require('express');
+const express = require('express')
 
-const router = express.Router();
+const router = express.Router()
 
 function prpareId(id) {
-  return id.split('--').map(e => parseInt(e, 10));
+  return id.split('--').map(e => parseInt(e, 10))
 }
 
 async function getCatData(db, id) {
-  const coll = db.collection('categories');
-  const data = await coll.findOne({ id });
-  return data;
+  const coll = db.collection('categories')
+  const data = await coll.findOne({ id })
+  return data
 }
 
 async function getOfferData(db, id) {
-  const cats = db.collection('categories');
-  const offers = db.collection('offers');
-  const offer = await offers.findOne({ id }, { categoryid: 1, id: 1, name: 1 });
-  return { offer, cat: await cats.findOne({ id: offer.categoryid }, { id: 1, keyValue: 1 }) };
+  const cats = db.collection('categories')
+  const offers = db.collection('offers')
+  const offer = await offers.findOne({ id }, { categoryid: 1, id: 1, name: 1 })
+  return { offer, cat: await cats.findOne({ id: offer.categoryid }, { id: 1, keyValue: 1 }) }
 }
 
 async function getCompareData(db, ids) {
-  const cats = db.collection('categories');
-  const offers = db.collection('offers');
+  const cats = db.collection('categories')
+  const offers = db.collection('offers')
   const items = await offers
       .find({ id: { $in: ids } }, { categoryid: 1, id: 1, name: 1 })
-      .toArray();
-  return { items, cat: await cats.findOne({ id: items[0].categoryid }, { id: 1, keyValue: 1 }) };
+      .toArray()
+  return { items, cat: await cats.findOne({ id: items[0].categoryid }, { id: 1, keyValue: 1 }) }
 }
 
 router.get('/:item/:id', (req, res, next) => {
-  const db = req.app.locals.db;
-  const item = req.params.item;
-  const id = (item === 'comparison') ? prpareId(req.params.id) : parseInt(req.params.id, 10);
+  const db = req.app.locals.db
+  const item = req.params.item
+  const id = (item === 'comparison') ? prpareId(req.params.id) : parseInt(req.params.id, 10)
 
   if (item === 'category') {
     getCatData(db, id)
@@ -48,10 +48,10 @@ router.get('/:item/:id', (req, res, next) => {
         },
       }))
       .catch((e) => {
-        const err = new Error(e);
-        err.status = 404;
-        next(err);
-      });
+        const err = new Error(e)
+        err.status = 404
+        next(err)
+      })
   } else if (item === 'offer') {
     getOfferData(db, id)
       .then(data => res.json({
@@ -67,10 +67,10 @@ router.get('/:item/:id', (req, res, next) => {
         },
       }))
       .catch((e) => {
-        const err = new Error(e);
-        err.status = 404;
-        next(err);
-      });
+        const err = new Error(e)
+        err.status = 404
+        next(err)
+      })
   } else if (item === 'comparison') {
     getCompareData(db, id)
       .then(data => res.json({
@@ -86,15 +86,15 @@ router.get('/:item/:id', (req, res, next) => {
         },
       }))
       .catch((e) => {
-        const err = new Error(e);
-        err.status = 404;
-        next(err);
-      });
+        const err = new Error(e)
+        err.status = 404
+        next(err)
+      })
   } else {
-    const err = new Error('Bad input data...');
-    err.status = 500;
-    next(err);
+    const err = new Error('Bad input data...')
+    err.status = 500
+    next(err)
   }
-});
+})
 
-module.exports = router;
+module.exports = router

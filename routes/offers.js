@@ -1,9 +1,9 @@
-const express = require('express');
+const express = require('express')
 
-const router = express.Router();
+const router = express.Router()
 
 async function getData(db, offer) {
-  const goods = db.collection('offers');
+  const goods = db.collection('offers')
   return {
     status: true,
     data: await goods.findOne({ id: offer }, {
@@ -28,19 +28,19 @@ async function getData(db, offer) {
       dimensions: 1,
       param: 1,
     }),
-  };
+  }
 }
 
 router.get('/:offer', (req, res, next) => {
-  const db = req.app.locals.db;
-  const offer = parseInt(req.params.offer, 10);
+  const db = req.app.locals.db
+  const offer = parseInt(req.params.offer, 10)
   getData(db, offer)
     .then(data => res.json(data))
     .catch((e) => {
-      const err = new Error(e);
-      err.status = 404;
-      next(err);
-    });
-});
+      const err = new Error(e)
+      err.status = 404
+      next(err)
+    })
+})
 
-module.exports = router;
+module.exports = router
