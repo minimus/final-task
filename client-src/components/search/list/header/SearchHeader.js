@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ({phrase, count}) {
+export default function ({ phrase, count }) {
   if (count === 0) {
     return (
       <div className="search-result-header">

@@ -1,4 +1,6 @@
-import React, {Component} from 'react'
+/* eslint-disable react/prefer-stateless-function */
+import React, { Component } from 'react'
+import propTypes from 'prop-types'
 import OffersSection from './list/OffersSection'
 import FacetsSection from './facets/Facets'
 import WithLoadingBar from '../WithLoadingBar'
@@ -10,14 +12,18 @@ class CategoryElements extends Component {
     return (
       <section className="category container">
         <div className="category-body">
-          <FacetsSection {...this.props}/>
-          <OffersSection {...this.props}/>
+          <FacetsSection {...this.props} />
+          <OffersSection {...this.props} />
         </div>
-        <LoadingBar loading={this.props.loading}/>
-        <ComparePane {...this.props}/>
+        <LoadingBar loading={this.props.loading} />
+        <ComparePane {...this.props} />
       </section>
     )
   }
+}
+
+CategoryElements.propTypes = {
+  loading: propTypes.bool.isRequired,
 }
 
 export default CategoryElements

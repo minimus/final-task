@@ -1,7 +1,14 @@
 import React from 'react'
-import {Menu, MenuWithLoadingBar} from './Menu'
+import propTypes from 'prop-types'
+import { MenuWithLoadingBar } from './Menu'
 
-export default function NavMenu({item, onClick, shown, curMenu, prevMenu, tooltip, onTooltipClick}) {
+export default function NavMenu({ item,
+                                  onClick,
+                                  shown,
+                                  curMenu,
+                                  prevMenu,
+                                  tooltip,
+                                  onTooltipClick }) {
   return (
     <MenuWithLoadingBar
       isLoading={!item}
@@ -14,4 +21,14 @@ export default function NavMenu({item, onClick, shown, curMenu, prevMenu, toolti
       onTooltipClick={onTooltipClick}
     />
   )
+}
+
+NavMenu.propTypes = {
+  item: propTypes.objectOf(propTypes.any).isRequired,
+  curMenu: propTypes.number.isRequired,
+  prevMenu: propTypes.number.isRequired,
+  shown: propTypes.bool.isRequired,
+  tooltip: propTypes.bool.isRequired,
+  onClick: propTypes.func.isRequired,
+  onTooltipClick: propTypes.func.isRequired,
 }

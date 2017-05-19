@@ -1,5 +1,6 @@
-import React, {Component} from 'react'
-import ComparisonElements, {ComparisonElementsWithLoadingBar} from './ComparisonElements'
+import React, { Component } from 'react'
+import propTypes from 'prop-types'
+import { ComparisonElementsWithLoadingBar } from './ComparisonElements'
 import './comparison.css'
 
 class Comparison extends Component {
@@ -11,6 +12,10 @@ class Comparison extends Component {
       />
     )
   }
+}
+
+Comparison.propTypes = {
+  data: propTypes.arrayOf(propTypes.object).isRequired,
 }
 
 export default Comparison

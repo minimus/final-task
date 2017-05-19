@@ -1,9 +1,10 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
+import propTypes from 'prop-types'
 import PagerButtonsFirstPane from './PagerButtonsFirstPane'
 import PagerButtonsOnePane from './PagerButtonsOnePane'
 import PagerButtonsTwoPane from './PagerButtonsTwoPane'
 import PagerButtonsThreePane from './PagerButtonsThreePane'
-import PagerButtonsLastPane  from './PagerButtonsLastPane'
+import PagerButtonsLastPane from './PagerButtonsLastPane'
 
 class PagerButtons extends Component {
   getButtonsPane = () => {
@@ -16,8 +17,7 @@ class PagerButtons extends Component {
           pages={this.props.pages}
         />
       )
-    }
-    else if (this.props.page <= 4 || this.props.page > this.props.pages - 4) {
+    } else if (this.props.page <= 4 || this.props.page > this.props.pages - 4) {
       return (
         <PagerButtonsTwoPane
           base={this.props.base}
@@ -27,16 +27,15 @@ class PagerButtons extends Component {
         />
       )
     }
-    else {
-      return (
-        <PagerButtonsThreePane
-          base={this.props.base}
-          category={this.props.category}
-          page={this.props.page}
-          pages={this.props.pages}
-        />
-      )
-    }
+
+    return (
+      <PagerButtonsThreePane
+        base={this.props.base}
+        category={this.props.category}
+        page={this.props.page}
+        pages={this.props.pages}
+      />
+    )
   }
 
   render() {
@@ -58,6 +57,13 @@ class PagerButtons extends Component {
       </span>
     )
   }
+}
+
+PagerButtons.propTypes = {
+  base: propTypes.string.isRequired,
+  category: propTypes.string.isRequired,
+  page: propTypes.number.isRequired,
+  pages: propTypes.number.isRequired,
 }
 
 export default PagerButtons

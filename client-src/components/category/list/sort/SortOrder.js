@@ -1,14 +1,13 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
+import propTypes from 'prop-types'
 
 class SortOrder extends Component {
-  sortOptions = () => {
-    return [
-      ['no',       'без сортировки'],
+  sortOptions = () => [
+      ['no', 'без сортировки'],
       ['priceMin', 'по возрастанию цены'],
       ['priceMax', 'по убыванию цены'],
-      ['name',     'по алфавиту']]
-      .map((el, i) => <option value={el[0]} key={i}>{el[1]}</option>)
-  }
+      ['name', 'по алфавиту']]
+      .map(el => <option value={el[0]} key={el[0]}>{el[1]}</option>)
 
   render() {
     return (
@@ -20,6 +19,11 @@ class SortOrder extends Component {
       </label>
     )
   }
+}
+
+SortOrder.propTypes = {
+  sort: propTypes.string.isRequired,
+  onChange: propTypes.func.isRequired,
 }
 
 export default SortOrder

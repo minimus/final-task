@@ -1,3 +1,1 @@
-/**
- * Created by Константин on 25.04.2017.
- */
+export default from './Pager'

@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import SearchHeader from './header'
 import SearchItems from './SearchItems'
 
@@ -20,7 +20,7 @@ class SearchList extends Component {
           phrase={decodeURIComponent(this.props.match.params.phrase)}
           count={this.props.count}
         />
-        <SearchItems {...this.props}/>
+        <SearchItems {...this.props} />
       </div>
     )
   }

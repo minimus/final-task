@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import {NavLink} from 'react-router-dom'
+import React, { Component } from 'react'
+import { NavLink } from 'react-router-dom'
 import './searchbar.css'
 
 class SearchBarElements extends Component {
@@ -7,7 +7,7 @@ class SearchBarElements extends Component {
     const linkTo = (this.props.phrase) ? `/search/${encodeURIComponent(this.props.phrase)}/1` : '#'
     return (
       <div className="search-bar">
-        <input type="text" onKeyUp={this.props.onKeyUp}/>
+        <input type="text" onKeyUp={this.props.onKeyUp} />
         <NavLink
           to={linkTo}
           className="search-button"

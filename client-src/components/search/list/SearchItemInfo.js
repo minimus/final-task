@@ -1,7 +1,7 @@
 import React from 'react'
-import {NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
-export default function ({category, link, vendor, country}) {
+export default function ({ category, link, vendor, country }) {
   return (
     <div className="search-item-info">
       <span className="category-info">

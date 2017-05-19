@@ -1,5 +1,6 @@
-import React, {Component} from 'react'
-import SearchElements, {SearchElementsWithLoadingBar} from './SearchElements'
+import React, { Component } from 'react'
+import propTypes from 'prop-types'
+import { SearchElementsWithLoadingBar } from './SearchElements'
 import './search.css'
 
 class Search extends Component {
@@ -11,6 +12,10 @@ class Search extends Component {
       />
     )
   }
+}
+
+Search.propTypes = {
+  data: propTypes.arrayOf(propTypes.object).isRequired,
 }
 
 export default Search

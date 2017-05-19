@@ -1,10 +1,10 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import Facets from '../../category/facets/Facets'
 
 class SearchFacets extends Component {
   render() {
     return (
-      <Facets {...this.props}/>
+      <Facets {...this.props} />
     )
   }
 }

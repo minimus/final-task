@@ -1,9 +1,14 @@
 import React from 'react'
+import propTypes from 'prop-types'
 
-export default function ({onClear}) {
+export default function FacetsClearButton({ onClear }) {
   return (
-    <div className="facets-clear-button" onClick={onClear}>
+    <button className="facets-clear-button" onClick={onClear}>
       Очистить фильтры
-    </div>
+    </button>
   )
+}
+
+FacetsClearButton.propTypes = {
+  onClear: propTypes.func.isRequired,
 }

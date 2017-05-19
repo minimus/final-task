@@ -1,12 +1,13 @@
 import React from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import propTypes from 'prop-types'
 import FooterMenu from '../../containers/menu/FooterMenuContainer'
 
-export default function ({menu}) {
+export default function Footer() {
   return (
     <footer>
       <div id="info">
-        <FooterMenu/>
+        <FooterMenu />
       </div>
       <div id="copyright">
         <div>Copyright &copy; 2017, <Link to="http://www.simplelib.com">minimus</Link>. All rights reserved.</div>
@@ -14,4 +15,8 @@ export default function ({menu}) {
       </div>
     </footer>
   )
+}
+
+Footer.propTypes = {
+  menu: propTypes.arrayOf(propTypes.object).isRequired,
 }

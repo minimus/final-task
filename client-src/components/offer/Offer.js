@@ -1,5 +1,6 @@
-import React, {Component} from 'react'
-import OfferElements, {OfferElementsWithLoadingBar} from './OfferElements'
+import React, { Component } from 'react'
+import propTypes from 'prop-types'
+import { OfferElementsWithLoadingBar } from './OfferElements'
 import './offer.css'
 
 class Offer extends Component {
@@ -11,6 +12,10 @@ class Offer extends Component {
       />
     )
   }
+}
+
+Offer.propTypes = {
+  data: propTypes.arrayOf(propTypes.object).isRequired,
 }
 
 export default Offer

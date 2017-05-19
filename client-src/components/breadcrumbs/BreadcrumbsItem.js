@@ -1,7 +1,8 @@
 import React from 'react'
-import {NavLink} from 'react-router-dom'
+import propTypes from 'prop-types'
+import { NavLink } from 'react-router-dom'
 
-export default function ({id, link, name, last}) {
+export default function BreadcrumbsItem({ id, link, name, last }) {
   if (last) {
     return (
       <span id={id} className="breadcrumbs-item">
@@ -16,4 +17,11 @@ export default function ({id, link, name, last}) {
       </NavLink>
     </span>
   )
+}
+
+BreadcrumbsItem.propTypes = {
+  id: propTypes.number.isRequired,
+  link: propTypes.string.isRequired,
+  name: propTypes.string.isRequired,
+  last: propTypes.bool.isRequired,
 }

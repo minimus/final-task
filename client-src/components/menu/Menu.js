@@ -1,4 +1,5 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
+import propTypes from 'prop-types'
 import MenuButton from './MenuButton'
 import MenuBar from './MenuBar'
 import withLoadingBar from '../WithLoadingBar'
@@ -20,13 +21,14 @@ class Menu extends Component {
         shown={this.props.shown}
         curMenu={this.props.curMenu}
         prevMenu={this.props.prevMenu}
-      />
+      />,
     )
 
     if (item.children.length) {
-      for (const val of item.children) {
+      item.children.forEach(val => this.createBar(val))
+      /* for (const val of item.children) {
         this.createBar(val)
-      }
+      }*/
     }
   }
 
@@ -47,6 +49,16 @@ class Menu extends Component {
       </span>
     )
   }
+}
+
+Menu.propTypes = {
+  item: propTypes.objectOf(propTypes.any).isRequired,
+  curMenu: propTypes.number.isRequired,
+  prevMenu: propTypes.number.isRequired,
+  shown: propTypes.bool.isRequired,
+  tooltip: propTypes.bool.isRequired,
+  onClick: propTypes.func.isRequired,
+  onTooltipClick: propTypes.func.isRequired,
 }
 
 export default Menu

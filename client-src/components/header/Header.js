@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import {NavLink} from 'react-router-dom'
+import React, { Component } from 'react'
+import { NavLink } from 'react-router-dom'
 import MenuContainer from '../../containers/menu'
 import Breadcrumbs from '../../containers/breadcrumbs'
 import SearchBar from '../../containers/searchbar'
@@ -11,14 +11,14 @@ class Header extends Component {
       <header>
         <nav>
           <MenuContainer />
-          <SearchBar/>
+          <SearchBar />
           <span>
             <NavLink exact to="/" id="right-menu">
               <i className="material-icons md-48">home</i>
             </NavLink>
           </span>
         </nav>
-        <Breadcrumbs/>
+        <Breadcrumbs />
       </header>
     )
   }

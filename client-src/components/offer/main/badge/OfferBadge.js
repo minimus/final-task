@@ -1,5 +1,6 @@
-import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
+import React, { Component } from 'react'
+import propTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 class OfferBadge extends Component {
   delivery = () => {
@@ -46,6 +47,10 @@ class OfferBadge extends Component {
       </div>
     )
   }
+}
+
+OfferBadge.propTypes = {
+  data: propTypes.objectOf(propTypes.any).isRequired,
 }
 
 export default OfferBadge

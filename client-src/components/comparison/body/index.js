@@ -1,1 +1,1 @@
-export default from './TechInfo'
+export default from './TechInfoRow'

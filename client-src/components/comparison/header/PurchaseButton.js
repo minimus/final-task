@@ -1,7 +1,8 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import propTypes from 'prop-types'
 
-export default function ({link}) {
+export default function PurchaseButton({ link }) {
   return (
     <span className="purchase-button">
       <Link to={link}>
@@ -9,4 +10,8 @@ export default function ({link}) {
       </Link>
     </span>
   )
+}
+
+PurchaseButton.propTypes = {
+  link: propTypes.string.isRequired,
 }
