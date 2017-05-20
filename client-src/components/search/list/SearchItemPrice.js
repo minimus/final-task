@@ -1,7 +1,8 @@
 import React from 'react'
+import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-export default function ({ price, url }) {
+export default function SearchItemPrice({ price, url }) {
   return (
     <div className="item-price">
       <span className="search-item-price">{price}</span>
@@ -10,4 +11,9 @@ export default function ({ price, url }) {
       </span>
     </div>
   )
+}
+
+SearchItemPrice.propTypes = {
+  price: propTypes.number.isRequired,
+  url: propTypes.string.isRequired,
 }

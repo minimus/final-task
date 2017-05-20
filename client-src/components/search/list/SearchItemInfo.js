@@ -1,7 +1,8 @@
 import React from 'react'
+import propTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 
-export default function ({ category, link, vendor, country }) {
+export default function SearchItemInfo({ category, link, vendor, country }) {
   return (
     <div className="search-item-info">
       <span className="category-info">
@@ -22,4 +23,11 @@ export default function ({ category, link, vendor, country }) {
       }
     </div>
   )
+}
+
+SearchItemInfo.propTypes = {
+  category: propTypes.string.isRequired,
+  link: propTypes.string.isRequired,
+  vendor: propTypes.string.isRequired,
+  country: propTypes.string.isRequired,
 }

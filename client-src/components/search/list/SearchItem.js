@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import propTypes from 'prop-types'
 import ItemImage from './SearchItemImage'
 import ItemMainInfo from './SearchItemDescription'
 import ItemPrice from './SearchItemPrice'
@@ -40,6 +41,11 @@ class SearchItem extends Component {
       </div>
     )
   }
+}
+
+SearchItem.propTypes = {
+  categories: propTypes.arrayOf(propTypes.object).isRequired,
+  item: propTypes.objectOf(propTypes.any).isRequired,
 }
 
 export default SearchItem

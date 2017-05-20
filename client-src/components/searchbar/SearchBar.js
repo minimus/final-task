@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import propTypes from 'prop-types'
 import SearchBarElements from './SearchBarElements'
 import Tooltip from './Tooltip'
 import './searchbar.css'
@@ -15,6 +16,11 @@ class SearchBar extends Component {
       </div>
     )
   }
+}
+
+SearchBar.propTypes = {
+  tooltip: propTypes.bool.isRequired,
+  onTooltipClick: propTypes.func.isRequired,
 }
 
 export default SearchBar

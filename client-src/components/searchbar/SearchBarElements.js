@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
+import propTypes from 'prop-types'
 import './searchbar.css'
 
 class SearchBarElements extends Component {
@@ -19,6 +20,12 @@ class SearchBarElements extends Component {
       </div>
     )
   }
+}
+
+SearchBarElements.propTypes = {
+  phrase: propTypes.string.isRequired,
+  onKeyUp: propTypes.func.isRequired,
+  onClick: propTypes.func.isRequired,
 }
 
 export default SearchBarElements
