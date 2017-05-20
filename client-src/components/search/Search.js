@@ -4,10 +4,12 @@ import { SearchElementsWithLoadingBar } from './SearchElements'
 import './search.css'
 
 class Search extends Component {
+  isLoading = () => (!this.props.data)
+
   render() {
     return (
       <SearchElementsWithLoadingBar
-        isLoading={!this.props.data}
+        isLoading={this.isLoading()}
         {...this.props}
       />
     )

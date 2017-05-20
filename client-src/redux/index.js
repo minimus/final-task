@@ -2,7 +2,6 @@ import { createStore, applyMiddleware, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import menu from './modules/menu'
-import home from './modules/home'
 import category from './modules/category'
 import offer from './modules/offer'
 import comparison from './modules/comparison'
@@ -19,7 +18,6 @@ const createStoreWithMiddleware = applyMiddleware(
 
 const reducer = combineReducers({
   menu,
-  home,
   category,
   offer,
   comparison,

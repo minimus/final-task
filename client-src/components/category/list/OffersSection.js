@@ -6,11 +6,13 @@ import Pager from '../../pager/Pager'
 import SortOrderPane from './sort/SortOrderPane'
 
 class OffersSection extends Component {
+  getTitle = () => (this.props.category.keyValue)
+
   render() {
     return (
       <div id="offers-section">
         <div id="category-header">
-          <Header title={this.props.category.keyValue} count={this.props.count} />
+          <Header title={this.getTitle()} count={this.props.count} />
         </div>
         <SortOrderPane sort={this.props.sort} onChange={this.props.onChange} />
         <Pager

@@ -4,10 +4,12 @@ import { ComparisonElementsWithLoadingBar } from './ComparisonElements'
 import './comparison.css'
 
 class Comparison extends Component {
+  isLoading = () => (!this.props.data)
+
   render() {
     return (
       <ComparisonElementsWithLoadingBar
-        isLoading={!this.props.data}
+        isLoading={this.isLoading()}
         {...this.props}
       />
     )

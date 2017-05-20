@@ -4,10 +4,12 @@ import { OfferElementsWithLoadingBar } from './OfferElements'
 import './offer.css'
 
 class Offer extends Component {
+  isLoading = () => (!this.props.data)
+
   render() {
     return (
       <OfferElementsWithLoadingBar
-        isLoading={!this.props.data}
+        isLoading={this.isLoading()}
         {...this.props}
       />
     )
