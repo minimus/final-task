@@ -58,21 +58,14 @@ export function prepareFacets(data) {
     return prev
   }, [])
 
-  /* while (true) {
-   const idx = out.findIndex(e => e.facet.match(/\d{4}-\d{2}-\d{2}[tT]\d{2}:\d{2}:\d{2}.\d{3}[zZ]/))
-    if (idx > -1) out.splice(idx, 1)
-    else break
-  }*/
-
   for (let i = 0; i < out.length; i += 1) {
     out[i].id = `f${i + 1}`
     out[i].view = (out[i].facet === 'Цвет') ? 'color' : 'standard'
-    while (true) {
-      const idx = out[i].values
-        .findIndex(e => ((typeof e === 'string') ? !!e.match(/\d{4}-\d{2}-\d{2}[tT]\d{2}:\d{2}:\d{2}.\d{3}[zZ]/) : false))
-      if (idx > -1) out[i].values.splice(idx, 1)
-      else break
-    }
+
+    out[i].values = out[i].values.reduce((prev, cur) => {
+      if (typeof cur !== 'string' || !cur.match(/\d{4}-\d{2}-\d{2}[tT]\d{2}:\d{2}:\d{2}.\d{3}[zZ]/)) { prev.push(cur) }
+      return prev
+    }, [])
   }
 
   return out
