@@ -8,9 +8,9 @@ export default function Preview({ pictures, selectedPicture, onClick, onOpen }) 
   // const pics = pictures || [noPicture]
   return (
     <div className="offer-preview">
-      <div className="image-preview-container" onClick={onOpen}>
+      <button className="image-preview-container" onClick={onOpen}>
         <img className="image-preview" src={selectedPicture} alt={selectedPicture} />
-      </div>
+      </button>
       <Thumbnails pictures={pictures} selected={selectedPicture} onClick={onClick} />
     </div>
   )

@@ -18,7 +18,13 @@
 
 .offer-main-pane .image-preview-container {
   align-self: center;
+  background-color: transparent;
+  border: 0;
   cursor: zoom-in;
+}
+
+.offer-main-pane .image-preview-container:focus {
+  outline: none;
 }
 
 .offer-main-pane .image-preview {
@@ -39,12 +45,16 @@
 }
 
 .offer-main-pane .thumbnails .thumbnail-container {
-  width: 35px;
-  height: 35px;
   margin: 5px;
+  padding: 1px;
+  background-color: #ffffff;
   text-align: center;
   border: 1px solid #dedede;
   cursor: pointer;
+}
+
+.offer-main-pane .thumbnails .thumbnail-container:focus {
+  outline: none;
 }
 
 .offer-main-pane .thumbnails .thumbnail-container.selected {
@@ -75,6 +85,14 @@
 #preview-dialog #dialog-caption .close-button {
   color: #ffffff;
   cursor: pointer;
+  padding: 1px;
+  margin: 0;
+  background-color: transparent;
+  border: 0;
+}
+
+#preview-dialog #dialog-caption .close-button:focus {
+  outline: none;
 }
 
 #preview-dialog #dialog-inline {
@@ -122,12 +140,16 @@
 }
 
 #preview-dialog .thumbnails .thumbnail-container {
-  width: 35px;
-  height: 35px;
   margin: 5px;
+  padding: 1px;
   text-align: center;
+  background-color: #ffffff;
   border: 1px solid #dedede;
   cursor: pointer;
+}
+
+#preview-dialog .thumbnails .thumbnail-container:focus {
+  outline: none;
 }
 
 #preview-dialog .thumbnails .thumbnail-container.selected {
@@ -136,6 +158,13 @@
 
 #preview-dialog #show-right, #preview-dialog #show-left {
   cursor: pointer;
+  background-color: transparent;
+  border: 0;
+  padding: 1px;
+}
+
+#preview-dialog #show-right:focus, #preview-dialog #show-left:focus {
+  outline: none;
 }
 
 #major-info {

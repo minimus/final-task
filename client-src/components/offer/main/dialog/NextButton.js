@@ -3,9 +3,9 @@ import propTypes from 'prop-types'
 
 export default function NextButton({ onClick }) {
   return (
-    <div id="show-right" onClick={onClick}>
+    <button id="show-right" onClick={onClick}>
       <i className="material-icons md-48">chevron_right</i>
-    </div>
+    </button>
   )
 }
 

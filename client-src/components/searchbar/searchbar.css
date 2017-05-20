@@ -75,6 +75,18 @@ nav .search-bar-container .search-tooltip {
   box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.18);
 }
 
+.search-tooltip-body button {
+  background-color: transparent;
+  border: 0;
+  padding: 1px;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-tooltip-body button:focus {
+  outline: none;
+}
+
 .search-tooltip-body i {
   color: #f9dc46;
 }

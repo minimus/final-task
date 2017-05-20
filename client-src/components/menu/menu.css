@@ -197,7 +197,21 @@ div#menu ul.hided {
   box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.18);
 }
 
+.menu-tooltip-body button {
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-tooltip-body button:focus {
+  outline: none;
+}
+
 .menu-tooltip-body .material-icons {
+  color: #ffffff;
   cursor: pointer;
 }
 

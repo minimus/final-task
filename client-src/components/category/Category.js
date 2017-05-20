@@ -4,10 +4,12 @@ import { CategoryElementsWithLoadingBar } from './CategoryElements'
 import './category.css'
 
 class Category extends Component {
+  isLoading = () => (!this.props.data || !this.props.facets)
+
   render() {
     return (
       <CategoryElementsWithLoadingBar
-        isLoading={!this.props.data}
+        isLoading={this.isLoading()}
         {...this.props}
       />
     )
@@ -16,6 +18,7 @@ class Category extends Component {
 
 Category.propTypes = {
   data: propTypes.arrayOf(propTypes.object).isRequired,
+  facets: propTypes.arrayOf(propTypes.object).isRequired,
 }
 
 export default Category

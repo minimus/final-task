@@ -4,7 +4,9 @@ import propTypes from 'prop-types'
 export default function DialogCaption({ onClose }) {
   return (
     <div id="dialog-caption">
-      <i className="material-icons md-36 close-button" onClick={onClose}>close</i>
+      <button className="close-button" onClick={onClose}>
+        <i className="material-icons md-36">close</i>
+      </button>
     </div>
   )
 }

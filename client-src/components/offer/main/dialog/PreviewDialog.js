@@ -6,7 +6,6 @@ import NextButton from './NextButton'
 import PreviewPane from './PreviewPane'
 
 export default function PreviewDialog({ pictures, selected, show, onClick, onClose, onNavClick }) {
-  console.log(selected)
   const dialogStyle = { display: (show) ? 'block' : 'none' }
   return (
     <div id="preview-dialog" style={dialogStyle}>

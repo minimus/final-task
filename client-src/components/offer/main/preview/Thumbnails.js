@@ -5,12 +5,12 @@ import propTypes from 'prop-types'
 export default function Thumbnails({ pictures, selected, onClick }) {
   return (
     <div className="thumbnails">
-      {pictures.map((e, i) => {
+      {pictures.map((e) => {
         const classSelected = (e === selected) ? 'selected' : ''
         return (
-          <div className={classNames(classSelected, 'thumbnail-container')} onClick={onClick} key={i}>
+          <button className={classNames(classSelected, 'thumbnail-container')} onClick={onClick} key={e}>
             <img className="thumbnail" src={e} alt={e} />
-          </div>
+          </button>
         )
       })}
     </div>

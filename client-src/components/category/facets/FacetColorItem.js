@@ -43,7 +43,7 @@ export default function FacetColorItem({ id, name, value, field, selected, onCha
   }
   const classSelected = (selected) ? 'selected' : ''
   return (
-    <span
+    <button
       id={id}
       className={classNames(classSelected, 'facet-item', 'color-item')}
       style={itemStyle}
@@ -54,7 +54,7 @@ export default function FacetColorItem({ id, name, value, field, selected, onCha
       onClick={onChange}
     >
       {' '}
-    </span>
+    </button>
   )
 }
 

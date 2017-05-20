@@ -3,7 +3,7 @@ import propTypes from 'prop-types'
 import spinner from './spinner2.gif'
 
 export default function WithLoadingBar(Component) {
-  return function ({ isLoading, ...props }) {
+  const ComponentWithLoadingBar = ({ isLoading, ...props }) => {
     if (isLoading) {
       return (
         <span className="loading-spinner">
@@ -11,11 +11,12 @@ export default function WithLoadingBar(Component) {
         </span>
       )
     }
-
     return <Component {...props} />
   }
-}
 
-WithLoadingBar.propTypes = {
-  isLoading: propTypes.bool.isRequired,
+  ComponentWithLoadingBar.propTypes = {
+    isLoading: propTypes.bool.isRequired,
+  }
+
+  return ComponentWithLoadingBar
 }
