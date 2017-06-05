@@ -1,23 +1,25 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import propTypes from 'prop-types'
 import MenuBackPanel from './MenuBackPanel'
 import MenuItem from './MenuItem'
 
-export default function MenuBar({ main, onClick, shown, curMenu, prevMenu }) {
-  const parentId = main.id
-  let shownClass = ''
-  if (shown || prevMenu !== -1) {
-    if (curMenu === parentId) shownClass = 'shown'
-    else if (prevMenu === parentId) shownClass = 'hided'
+class MenuBar extends PureComponent {
+  render() {
+    const parentId = this.props.main.id
+    let shownClass = ''
+    if (this.props.shown || this.props.prevMenu !== -1) {
+      if (this.props.curMenu === parentId) shownClass = 'shown'
+      else if (this.props.prevMenu === parentId) shownClass = 'hided'
+    }
+    return (
+      <ul className={shownClass} id={parentId}>
+        <MenuBackPanel main={this.props.main} onClick={this.props.onClick} />
+        {this.props.main.children.map(val =>
+          <MenuItem key={val.id} item={val} onClick={this.props.onClick} />,
+        )}
+      </ul>
+    )
   }
-  return (
-    <ul className={shownClass} id={parentId}>
-      <MenuBackPanel main={main} onClick={onClick} />
-      {main.children.map(val =>
-        <MenuItem key={val.id} item={val} onClick={onClick} />,
-      )}
-    </ul>
-  )
 }
 
 MenuBar.propTypes = {
@@ -27,3 +29,5 @@ MenuBar.propTypes = {
   shown: propTypes.bool.isRequired,
   onClick: propTypes.func.isRequired,
 }
+
+export default MenuBar

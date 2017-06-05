@@ -45,11 +45,14 @@ nav .search-bar-container .search-tooltip {
 }
 
 .search-tooltip {
-  margin: 0 0 0 15%;
+  /*margin: 0 0 0 15%;*/
   display: flex;
   flex-direction: column;
   /*width: 330px;*/
-  width: 70%;
+  width: 50%;
+  position: absolute;
+  top: 480px;
+  left: 25%;
 }
 
 .search-tooltip.hided {
@@ -94,4 +97,8 @@ nav .search-bar-container .search-tooltip {
 .search-tooltip-body .material-icons {
   color: #ffffff;
   cursor: pointer;
+}
+
+.search-tooltip-body :first-child {
+  width: 100%;
 }

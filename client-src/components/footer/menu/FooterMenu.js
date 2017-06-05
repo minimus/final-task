@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import propTypes from 'prop-types'
 import withLoadingBar from '../../WithLoadingBar'
 import MenuPane from '../../menu/MenuPane'
 
-class FooterMenu extends Component {
+class FooterMenu extends PureComponent {
   constructor(props) {
     super(props)
     this.panes = [...props.menu.children]

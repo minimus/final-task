@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { NavLink } from 'react-router-dom'
 import propTypes from 'prop-types'
 
-class MenuPane extends Component {
+class MenuPane extends PureComponent {
 
   menuItem = (item, idx) => {
     if (item.children.length) {

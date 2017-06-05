@@ -1,6 +1,7 @@
-const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const BabiliPlugin = require('babili-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -33,6 +34,9 @@ module.exports = {
         NODE_ENV: JSON.stringify('production'),
       },
     }),
-    new webpack.optimize.UglifyJsPlugin(),
+    new BabiliPlugin(true),
+    /*new webpack.optimize.UglifyJsPlugin({
+      compress: process.env.NODE_ENV === 'production',
+    }),*/
   ],
-};
+}

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import propTypes from 'prop-types'
 import MenuButton from './MenuButton'
 import MenuBar from './MenuBar'
@@ -6,7 +6,7 @@ import withLoadingBar from '../WithLoadingBar'
 import MenuTooltip from './MenuTooltip'
 import './menu.css'
 
-class Menu extends Component {
+class Menu extends PureComponent {
   constructor(props) {
     super(props)
     this.bars = []
@@ -26,9 +26,6 @@ class Menu extends Component {
 
     if (item.children.length) {
       item.children.forEach(val => this.createBar(val))
-      /* for (const val of item.children) {
-        this.createBar(val)
-      }*/
     }
   }
 

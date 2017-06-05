@@ -1,26 +1,22 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import propTypes from 'prop-types'
 import { MenuWithLoadingBar } from './Menu'
 
-export default function NavMenu({ item,
-                                  onClick,
-                                  shown,
-                                  curMenu,
-                                  prevMenu,
-                                  tooltip,
-                                  onTooltipClick }) {
-  return (
-    <MenuWithLoadingBar
-      isLoading={!item}
-      item={item}
-      onClick={onClick}
-      shown={shown}
-      curMenu={curMenu}
-      prevMenu={prevMenu}
-      tooltip={tooltip}
-      onTooltipClick={onTooltipClick}
-    />
-  )
+class NavMenu extends PureComponent {
+  render() {
+    return (
+      <MenuWithLoadingBar
+        isLoading={!this.props.item}
+        item={this.props.item}
+        onClick={this.props.onClick}
+        shown={this.props.shown}
+        curMenu={this.props.curMenu}
+        prevMenu={this.props.prevMenu}
+        tooltip={this.props.tooltip}
+        onTooltipClick={this.props.onTooltipClick}
+      />
+    )
+  }
 }
 
 NavMenu.propTypes = {
@@ -32,3 +28,5 @@ NavMenu.propTypes = {
   onClick: propTypes.func.isRequired,
   onTooltipClick: propTypes.func.isRequired,
 }
+
+export default NavMenu
