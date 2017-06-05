@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import propTypes from 'prop-types'
 import ImageRow from './header/ImageRow'
 import HeaderRow from './header/HeaderRow'
@@ -6,7 +6,7 @@ import PriceRow from './header/PriceRow'
 import TechInfoRow from './body/TechInfoRow'
 import PurchaseRow from './footer/TableFooter'
 
-class ComparisonTable extends Component {
+class ComparisonTable extends PureComponent {
   getItemsData = (param) => {
     const items = []
 

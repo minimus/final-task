@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import propTypes from 'prop-types'
 import SearchHeader from './header'
 import SearchItems from './SearchItems'
 
-class SearchList extends Component {
+class SearchList extends PureComponent {
   getPhrase() {
     return decodeURIComponent(this.props.match.params.phrase)
   }

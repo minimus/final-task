@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import propTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-class OfferBadge extends Component {
+class OfferBadge extends PureComponent {
   delivery = () => {
     if (this.props.data.delivery) {
       return (

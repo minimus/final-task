@@ -1,25 +1,27 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import propTypes from 'prop-types'
 
-export default function FacetItem({ id, name, value, field, selected, onChange }) {
-  return (
-    <span className="facet-item">
-      <label htmlFor={id}>
-        <input
-          id={id}
-          type="checkbox"
-          className="facet-item"
-          data-field={field}
-          data-name={name}
-          data-value={value}
-          value={value}
-          checked={selected}
-          onChange={onChange}
-        />
-        {value}
-      </label>
-    </span>
-  )
+class FacetItem extends PureComponent {
+  render() {
+    return (
+      <span className="facet-item">
+        <label htmlFor={this.props.id}>
+          <input
+            id={this.props.id}
+            type="checkbox"
+            className="facet-item"
+            data-field={this.props.field}
+            data-name={this.props.name}
+            data-value={this.props.value}
+            value={this.props.value}
+            checked={this.props.selected}
+            onChange={this.props.onChange}
+          />
+          {this.props.value}
+        </label>
+      </span>
+    )
+  }
 }
 
 FacetItem.propTypes = {
@@ -30,3 +32,5 @@ FacetItem.propTypes = {
   selected: propTypes.bool.isRequired,
   onChange: propTypes.func.isRequired,
 }
+
+export default FacetItem

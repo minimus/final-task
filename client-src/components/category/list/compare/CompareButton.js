@@ -1,19 +1,21 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import propTypes from 'prop-types'
 import classNames from 'classnames'
 
-export default function CompareButton({ item, selected, onClick }) {
-  const classSelected = (selected.findIndex(e => e.id === item) >= 0) ? 'selected' : ''
-  return (
-    <button
-      className={classNames(classSelected, 'compare-button')}
-      onClick={onClick}
-      data-id={item}
-    >
-      <i className="material-icons md-24">compare</i>
-      <span>Сравнить</span>
-    </button>
-  )
+class CompareButton extends PureComponent {
+  render() {
+    const classSelected = (this.props.selected.findIndex(e => e.id === this.props.item) >= 0) ? 'selected' : ''
+    return (
+      <button
+        className={classNames(classSelected, 'compare-button')}
+        onClick={this.props.onClick}
+        data-id={this.props.item}
+      >
+        <i className="material-icons md-24">compare</i>
+        <span>Сравнить</span>
+      </button>
+    )
+  }
 }
 
 CompareButton.propTypes = {
@@ -21,3 +23,5 @@ CompareButton.propTypes = {
   selected: propTypes.arrayOf(propTypes.object).isRequired,
   onClick: propTypes.func.isRequired,
 }
+
+export default CompareButton

@@ -1,16 +1,22 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import propTypes from 'prop-types'
 import Thumbnails from '../preview/Thumbnails'
 
-export default function PreviewPane({ pictures, selected, onClick }) {
-  return (
-    <div className="offer-preview">
-      <div className="image-preview-container">
-        <img className="image-preview" src={selected} alt={selected} />
+class PreviewPane extends PureComponent {
+  render() {
+    return (
+      <div className="offer-preview">
+        <div className="image-preview-container">
+          <img className="image-preview" src={this.props.selected} alt={this.props.selected} />
+        </div>
+        <Thumbnails
+          pictures={this.props.pictures}
+          selected={this.props.selected}
+          onClick={this.props.onClick}
+        />
       </div>
-      <Thumbnails pictures={pictures} selected={selected} onClick={onClick} />
-    </div>
-  )
+    )
+  }
 }
 
 PreviewPane.propTypes = {
@@ -18,3 +24,5 @@ PreviewPane.propTypes = {
   selected: propTypes.string.isRequired,
   onClick: propTypes.func.isRequired,
 }
+
+export default PreviewPane

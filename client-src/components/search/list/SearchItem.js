@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import propTypes from 'prop-types'
 import ItemImage from './SearchItemImage'
 import ItemMainInfo from './SearchItemDescription'
 import ItemPrice from './SearchItemPrice'
 import ItemInfo from './SearchItemInfo'
 
-class SearchItem extends Component {
+class SearchItem extends PureComponent {
   categoryNameById = id => this.props.categories.find(e => e.id === id).keyValue
 
   shortenText = (text, num) => {

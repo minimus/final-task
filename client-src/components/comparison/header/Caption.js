@@ -1,16 +1,20 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import propTypes from 'prop-types'
 import CaptionItem from './CaptionItem'
 
-export default function Caption({ data }) {
-  return (
-    <div className="comparison-caption">
-      <div className="comparison-caption-cell" />
-      {data.map(e => <CaptionItem item={e} key={e.id} />)}
-    </div>
-  )
+class Caption extends PureComponent {
+  render() {
+    return (
+      <div className="comparison-caption">
+        <div className="comparison-caption-cell" />
+        {this.props.data.map(e => <CaptionItem item={e} key={e.id} />)}
+      </div>
+    )
+  }
 }
 
 Caption.propTypes = {
   data: propTypes.arrayOf(propTypes.object).isRequired,
 }
+
+export default Caption

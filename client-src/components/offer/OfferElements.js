@@ -1,5 +1,4 @@
-/* eslint-disable react/prefer-stateless-function */
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import propTypes from 'prop-types'
 import WithLoadingBar from '../WithLoadingBar'
 import LoadingBar from '../LoadingBar'
@@ -7,7 +6,7 @@ import OfferMainPane from './main'
 import OfferDetailsPane from './details'
 import PreviewDialog from './main/dialog'
 
-class OfferElements extends Component {
+class OfferElements extends PureComponent {
   render() {
     return (
       <section className="offer container">

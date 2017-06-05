@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
 import ComparePaneIcon from './ComparePaneIcon'
 import ComparePaneButton from './ComparePaneButton'
 import ComparePaneClearButton from './ComparePaneClearButton'
 
-class ComparePane extends Component {
+class ComparePane extends PureComponent {
   getButtonParams = fifo => ({ disabled: (fifo.length < 2), link: `/comparison/${fifo.map(e => e.id).join('--')}` })
 
   render() {

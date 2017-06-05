@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import propTypes from 'prop-types'
 import { OfferElementsWithLoadingBar } from './OfferElements'
 import './offer.css'
 
-class Offer extends Component {
+class Offer extends PureComponent {
   isLoading = () => (!this.props.data)
 
   render() {

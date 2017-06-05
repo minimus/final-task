@@ -1,17 +1,21 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import propTypes from 'prop-types'
 
-export default function Price({ price }) {
-  return (
-    <div className="price-item-wrapper">
-      <span className="price-item">
-        {price}
-      </span>
-    </div>
+class Price extends PureComponent {
+  render() {
+    return (
+      <div className="price-item-wrapper">
+        <span className="price-item">
+          {this.props.price}
+        </span>
+      </div>
 
-  )
+    )
+  }
 }
 
 Price.propTypes = {
   price: propTypes.number.isRequired,
 }
+
+export default Price

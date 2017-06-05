@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { NavLink } from 'react-router-dom'
 import propTypes from 'prop-types'
 
-export default function ComparePaneIcon({ id, image, link, name }) {
-  return (
-    <NavLink to={link} data-id={id} title={name}>
-      <img src={image} alt={name} />
-    </NavLink>
-  )
+class ComparePaneIcon extends PureComponent {
+  render() {
+    return (
+      <NavLink to={this.props.link} data-id={this.props.id} title={this.props.name}>
+        <img src={this.props.image} alt={this.props.name} />
+      </NavLink>
+    )
+  }
 }
 
 ComparePaneIcon.propTypes = {
@@ -16,3 +18,5 @@ ComparePaneIcon.propTypes = {
   link: propTypes.string.isRequired,
   name: propTypes.string.isRequired,
 }
+
+export default ComparePaneIcon

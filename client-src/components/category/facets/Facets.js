@@ -1,26 +1,28 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import propTypes from 'prop-types'
 import FacetGroup from './FacetGroup'
 import FacetsClearButton from './FacetsClearButton'
 
-export default function FacetsSection({ facets, selectedFacets, onClear, onFacetChange }) {
-  return (
-    <div id="facets" className="facets-container">
-      <FacetsClearButton onClear={onClear} />
-      {facets.map((e, i) => {
-        const idx = i + 1
-        return (
-          <FacetGroup
-            facet={e}
-            selectedFacets={selectedFacets}
-            onChange={onFacetChange}
-            key={idx}
-          />
-        )
-      })}
-      <FacetsClearButton onClear={onClear} />
-    </div>
-  )
+class FacetsSection extends PureComponent {
+  render() {
+    return (
+      <div id="facets" className="facets-container">
+        <FacetsClearButton onClear={this.props.onClear} />
+        {this.props.facets.map((e, i) => {
+          const idx = i + 1
+          return (
+            <FacetGroup
+              facet={e}
+              selectedFacets={this.props.selectedFacets}
+              onChange={this.props.onFacetChange}
+              key={idx}
+            />
+          )
+        })}
+        <FacetsClearButton onClear={this.props.onClear} />
+      </div>
+    )
+  }
 }
 
 FacetsSection.propTypes = {
@@ -29,3 +31,5 @@ FacetsSection.propTypes = {
   onClear: propTypes.func.isRequired,
   onFacetChange: propTypes.func.isRequired,
 }
+
+export default FacetsSection

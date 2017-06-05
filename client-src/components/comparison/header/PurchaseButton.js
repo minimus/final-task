@@ -1,17 +1,21 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { Link } from 'react-router-dom'
 import propTypes from 'prop-types'
 
-export default function PurchaseButton({ link }) {
-  return (
-    <span className="purchase-button">
-      <Link to={link}>
+class PurchaseButton extends PureComponent {
+  render() {
+    return (
+      <span className="purchase-button">
+        <Link to={this.props.link}>
         Купить
-      </Link>
-    </span>
-  )
+        </Link>
+      </span>
+    )
+  }
 }
 
 PurchaseButton.propTypes = {
   link: propTypes.string.isRequired,
 }
+
+export default PurchaseButton

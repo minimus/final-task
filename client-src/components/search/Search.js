@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import propTypes from 'prop-types'
 import { SearchElementsWithLoadingBar } from './SearchElements'
 import './search.css'
 
-class Search extends Component {
+class Search extends PureComponent {
   isLoading = () => (!this.props.data)
 
   render() {

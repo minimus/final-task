@@ -1,20 +1,26 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
 
-export default function Thumbnails({ pictures, selected, onClick }) {
-  return (
-    <div className="thumbnails">
-      {pictures.map((e) => {
-        const classSelected = (e === selected) ? 'selected' : ''
-        return (
-          <button className={classNames(classSelected, 'thumbnail-container')} onClick={onClick} key={e}>
-            <img className="thumbnail" src={e} alt={e} />
-          </button>
-        )
-      })}
-    </div>
-  )
+class Thumbnails extends PureComponent {
+  render() {
+    return (
+      <div className="thumbnails">
+        {this.props.pictures.map((e) => {
+          const classSelected = (e === this.props.selected) ? 'selected' : ''
+          return (
+            <button
+              className={classNames(classSelected, 'thumbnail-container')}
+              onClick={this.props.onClick}
+              key={e}
+            >
+              <img className="thumbnail" src={e} alt={e} />
+            </button>
+          )
+        })}
+      </div>
+    )
+  }
 }
 
 Thumbnails.propTypes = {
@@ -22,3 +28,5 @@ Thumbnails.propTypes = {
   selected: propTypes.bool.isRequired,
   onClick: propTypes.func.isRequired,
 }
+
+export default Thumbnails

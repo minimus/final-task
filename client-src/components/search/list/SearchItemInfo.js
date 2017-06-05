@@ -1,28 +1,30 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import propTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 
-export default function SearchItemInfo({ category, link, vendor, country }) {
-  return (
-    <div className="search-item-info">
-      <span className="category-info">
-        <i className="material-icons">folder_open</i>
-        <NavLink to={link}>{category}</NavLink>
-      </span>
-      {!!vendor &&
+class SearchItemInfo extends PureComponent {
+  render() {
+    return (
+      <div className="search-item-info">
+        <span className="category-info">
+          <i className="material-icons">folder_open</i>
+          <NavLink to={this.props.link}>{this.props.category}</NavLink>
+        </span>
+        {!!this.props.vendor &&
         <span className="vendor-info">
           <i className="material-icons">bookmark_border</i>
-          {vendor}
+          {this.props.vendor}
         </span>
-      }
-      {!!country &&
+        }
+        {!!this.props.country &&
         <span className="country-info">
           <i className="material-icons">build</i>
-          {country}
+          {this.props.country}
         </span>
-      }
-    </div>
-  )
+        }
+      </div>
+    )
+  }
 }
 
 SearchItemInfo.propTypes = {
@@ -31,3 +33,5 @@ SearchItemInfo.propTypes = {
   vendor: propTypes.string.isRequired,
   country: propTypes.string.isRequired,
 }
+
+export default SearchItemInfo

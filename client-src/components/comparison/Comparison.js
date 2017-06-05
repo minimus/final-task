@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import propTypes from 'prop-types'
 import { ComparisonElementsWithLoadingBar } from './ComparisonElements'
 import './comparison.css'
 
-class Comparison extends Component {
+class Comparison extends PureComponent {
   isLoading = () => (!this.props.data)
 
   render() {

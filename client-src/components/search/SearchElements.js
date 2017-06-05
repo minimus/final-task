@@ -1,12 +1,11 @@
-/* eslint-disable react/prefer-stateless-function */
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import propTypes from 'prop-types'
 import WithLoadingBar from '../WithLoadingBar'
 import SearchList from './list/SearchList'
 import SearchFacets from './facets/SearchFacets'
 import LoadingBar from '../LoadingBar'
 
-class SearchElements extends Component {
+class SearchElements extends PureComponent {
   render() {
     return (
       <section id="search-result" className="search-container">

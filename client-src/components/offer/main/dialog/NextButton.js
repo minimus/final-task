@@ -1,14 +1,18 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import propTypes from 'prop-types'
 
-export default function NextButton({ onClick }) {
-  return (
-    <button id="show-right" onClick={onClick}>
-      <i className="material-icons md-48">chevron_right</i>
-    </button>
-  )
+class NextButton extends PureComponent {
+  render() {
+    return (
+      <button id="show-right" onClick={this.props.onClick}>
+        <i className="material-icons md-48">chevron_right</i>
+      </button>
+    )
+  }
 }
 
 NextButton.propTypes = {
   onClick: propTypes.func.isRequired,
 }
+
+export default NextButton
