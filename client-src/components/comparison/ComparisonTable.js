@@ -20,7 +20,7 @@ class ComparisonTable extends PureComponent {
 
   render() {
     return (
-      <div className="comparison-table">
+      <section className="comparison-table">
         <ImageRow items={this.props.data} />
         <HeaderRow items={this.props.data} />
         <PriceRow items={this.props.data} />
@@ -28,7 +28,7 @@ class ComparisonTable extends PureComponent {
         {this.props.params.map(e =>
           <TechInfoRow caption={e} items={this.getItemsData(e)} key={e} />)}
         <PurchaseRow items={this.props.data} />
-      </div>
+      </section>
     )
   }
 }

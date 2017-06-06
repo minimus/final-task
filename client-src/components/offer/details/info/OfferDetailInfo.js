@@ -4,7 +4,7 @@ import propTypes from 'prop-types'
 class OfferDetailInfo extends PureComponent {
   render() {
     return (
-      <div id="detail-info">
+      <section id="detail-info">
         <h3>Характеристики</h3>
         {this.props.params.map((e) => {
           if (typeof e.keyValue === 'string' && !!e.keyValue.match(/\d{4}-\d{2}-\d{2}[tT]\d{2}:\d{2}:\d{2}.\d{3}[zZ]/)) {
@@ -18,7 +18,7 @@ class OfferDetailInfo extends PureComponent {
           )
         },
         )}
-      </div>
+      </section>
     )
   }
 }

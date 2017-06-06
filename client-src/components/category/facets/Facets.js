@@ -6,7 +6,7 @@ import FacetsClearButton from './FacetsClearButton'
 class FacetsSection extends PureComponent {
   render() {
     return (
-      <div id="facets" className="facets-container">
+      <section id="facets" className="facets-container">
         <FacetsClearButton onClear={this.props.onClear} />
         {this.props.facets.map((e, i) => {
           const idx = i + 1
@@ -20,7 +20,7 @@ class FacetsSection extends PureComponent {
           )
         })}
         <FacetsClearButton onClear={this.props.onClear} />
-      </div>
+      </section>
     )
   }
 }

@@ -4,7 +4,7 @@ import propTypes from 'prop-types'
 class OfferMajorInfo extends PureComponent {
   render() {
     return (
-      <div id="major-info">
+      <section id="major-info">
         <h1>{this.props.data.name}</h1>
         <div className="info-table">
           {this.props.info.map(e =>
@@ -13,7 +13,7 @@ class OfferMajorInfo extends PureComponent {
               <div className="info-cell info-value">{e.value}</div>
             </div>))}
         </div>
-      </div>
+      </section>
     )
   }
 }

@@ -11,7 +11,7 @@ class Offer extends PureComponent {
     let img
 
     return (
-      <div key={this.props.item.id.toString()} className="offer-item">
+      <section key={this.props.item.id.toString()} className="offer-item">
         <div className="offer-image">
           <NavLink to={`/offer/${this.props.item.id}`}>
             <img src={(picture) || noImage} alt={this.props.item.name} />
@@ -26,7 +26,7 @@ class Offer extends PureComponent {
           onClick={this.props.onSelect}
         />
         <span className="price">{this.props.item.price}</span>
-      </div>
+      </section>
     )
   }
 }

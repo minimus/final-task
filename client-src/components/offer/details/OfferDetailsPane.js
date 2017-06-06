@@ -6,10 +6,10 @@ import OfferDetailInfo from './info'
 class OfferDetailsPane extends PureComponent {
   render() {
     return (
-      <div className="offer-details-pane">
+      <section className="offer-details-pane">
         <OfferDescription description={this.props.data.description} />
         <OfferDetailInfo params={this.props.params} />
-      </div>
+      </section>
     )
   }
 }

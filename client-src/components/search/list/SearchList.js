@@ -11,22 +11,22 @@ class SearchList extends PureComponent {
   render() {
     if (this.props.count === 0) {
       return (
-        <div className="search-list">
+        <section className="search-list">
           <SearchHeader
             phrase={this.getPhrase()}
             count={this.props.count}
           />
-        </div>
+        </section>
       )
     }
     return (
-      <div className="search-list">
+      <section className="search-list">
         <SearchHeader
           phrase={this.getPhrase()}
           count={this.props.count}
         />
         <SearchItems {...this.props} />
-      </div>
+      </section>
     )
   }
 }

@@ -11,7 +11,7 @@ class ComparePane extends PureComponent {
   render() {
     const paneClass = (this.props.compareFIFO.length) ? 'shown' : 'hided'
     return (
-      <div className={classNames(paneClass, 'compare-pane')}>
+      <aside className={classNames(paneClass, 'compare-pane')}>
         <div className="compare-pane-items">
           {this.props.compareFIFO.map(e => <ComparePaneIcon {...e} key={e.id} />)}
         </div>
@@ -20,7 +20,7 @@ class ComparePane extends PureComponent {
           disabled={(!this.props.compareFIFO.length)}
           onClick={this.props.onClearCompare}
         />
-      </div>
+      </aside>
     )
   }
 }

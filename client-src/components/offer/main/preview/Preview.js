@@ -5,7 +5,7 @@ import Thumbnails from './Thumbnails'
 class Preview extends PureComponent {
   render() {
     return (
-      <div className="offer-preview">
+      <section className="offer-preview">
         <button className="image-preview-container" onClick={this.props.onOpen}>
           <img className="image-preview" src={this.props.selectedPicture} alt={this.props.selectedPicture} />
         </button>
@@ -14,7 +14,7 @@ class Preview extends PureComponent {
           selected={this.props.selectedPicture}
           onClick={this.props.onClick}
         />
-      </div>
+      </section>
     )
   }
 }

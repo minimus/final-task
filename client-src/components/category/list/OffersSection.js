@@ -10,7 +10,7 @@ class OffersSection extends PureComponent {
 
   render() {
     return (
-      <div id="offers-section">
+      <section id="offers-section">
         <div id="category-header">
           <Header title={this.getTitle()} count={this.props.count} />
         </div>
@@ -32,7 +32,7 @@ class OffersSection extends PureComponent {
           page={this.props.page}
           pages={this.props.pages}
         />
-      </div>
+      </section>
     )
   }
 }

@@ -7,7 +7,7 @@ import OfferBadge from './badge/OfferBadge'
 class OfferMainPane extends PureComponent {
   render() {
     return (
-      <div className="offer-main-pane">
+      <section className="offer-main-pane">
         <Preview
           pictures={this.props.pictures}
           selectedPicture={this.props.selectedPicture}
@@ -16,7 +16,7 @@ class OfferMainPane extends PureComponent {
         />
         <MajorInfo data={this.props.data} info={this.props.info} />
         <OfferBadge data={this.props.data} />
-      </div>
+      </section>
     )
   }
 }

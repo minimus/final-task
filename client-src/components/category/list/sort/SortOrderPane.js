@@ -6,9 +6,9 @@ import './sort.css'
 class SortOrderPane extends PureComponent {
   render() {
     return (
-      <div id="sort-order-pane">
+      <aside id="sort-order-pane">
         <SortOrder sort={this.props.sort} onChange={this.props.onChange} />
-      </div>
+      </aside>
     )
   }
 }

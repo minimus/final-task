@@ -4,10 +4,10 @@ import propTypes from 'prop-types'
 class OfferDescription extends PureComponent {
   render() {
     return (
-      <div id="description">
+      <section id="description">
         <h3>Описание</h3>
         <p>{this.props.description}</p>
-      </div>
+      </section>
     )
   }
 }
