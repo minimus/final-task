@@ -1,19 +1,17 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { NavLink } from 'react-router-dom'
 import propTypes from 'prop-types'
 
-class PagerButtonFirst extends PureComponent {
-  render() {
-    return (
-      <NavLink
-        to={`/${this.props.base}/${this.props.category}/${this.props.page}`}
-        activeClassName="active"
-        activeStyle={{ color: '#be3131' }}
-      >
-        <i className="material-icons">first_page</i>
-      </NavLink>
-    )
-  }
+export default function PagerButtonFirst({ base, category, page }) {
+  return (
+    <NavLink
+      to={`/${base}/${category}/${page}`}
+      activeClassName="active"
+      activeStyle={{ color: '#be3131' }}
+    >
+      <i className="material-icons">first_page</i>
+    </NavLink>
+  )
 }
 
 PagerButtonFirst.propTypes = {
@@ -21,5 +19,3 @@ PagerButtonFirst.propTypes = {
   category: propTypes.string.isRequired,
   page: propTypes.number.isRequired,
 }
-
-export default PagerButtonFirst

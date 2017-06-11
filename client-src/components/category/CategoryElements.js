@@ -1,5 +1,4 @@
-/* eslint-disable react/prefer-stateless-function */
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import propTypes from 'prop-types'
 import OffersSection from './list/OffersSection'
 import FacetsSection from './facets/Facets'
@@ -7,7 +6,7 @@ import WithLoadingBar from '../WithLoadingBar'
 import LoadingBar from '../LoadingBar'
 import ComparePane from './list/compare/ComparePane'
 
-class CategoryElements extends PureComponent {
+class CategoryElements extends Component {
   render() {
     return (
       <section className="category container">

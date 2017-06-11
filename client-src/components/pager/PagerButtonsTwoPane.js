@@ -6,8 +6,8 @@ class PagerButtonsTwoPane extends PureComponent {
   render() {
     const pagesArrayFirst = [1, 2, 3, 4]
     const pagesArrayLast = []
-    let i = this.props.pages - 3
-    while (i <= this.props.pages) pagesArrayLast.push(i += 1)
+    let i = this.props.pages - 4
+    while (i < this.props.pages) pagesArrayLast.push(i += 1)
     return (
       <span id="pager-buttons-pane">
         {pagesArrayFirst.map(idx =>

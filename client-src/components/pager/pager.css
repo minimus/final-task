@@ -1,9 +1,10 @@
-.pager-container {
+nav.pager-container {
   text-align: center;
   padding: 10px;
+  justify-content: center;
 }
 
-.pager-container a {
+nav.pager-container a {
   display: inline-block;
   border: 1px solid #dedede;
   border-radius: 3px;
@@ -13,16 +14,16 @@
   margin: 2px;
 }
 
-.pager-container a.active {
+nav.pager-container a.active {
   color: red;
   font-weight: 700;
 }
 
-.pager-container a:hover {
+nav.pager-container a:hover {
   background: #dbdaf7;
 }
 
-.pager-container .material-icons {
+nav.pager-container .material-icons {
   font-weight: bold;
   vertical-align: middle;
   padding: 0 0 3px;

@@ -6,14 +6,14 @@ import './pager.css'
 class Pager extends PureComponent {
   render() {
     return (
-      <aside id="pager" className="pager-container">
+      <nav id="pager" className="pager-container">
         <PagerButtons
           base={this.props.base}
           category={this.props.category}
           page={this.props.page}
           pages={this.props.pages}
         />
-      </aside>
+      </nav>
     )
   }
 }
