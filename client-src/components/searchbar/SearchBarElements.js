@@ -8,7 +8,12 @@ class SearchBarElements extends PureComponent {
     const linkTo = (this.props.phrase) ? `/search/${encodeURIComponent(this.props.phrase)}/1` : '#'
     return (
       <div className="search-bar">
-        <input type="text" onKeyUp={this.props.onKeyUp} />
+        <input
+          type="text"
+          onKeyUp={this.props.onKeyUp}
+          onChange={this.props.onChange}
+          value={this.props.phrase}
+        />
         <NavLink
           to={linkTo}
           className="search-button"
@@ -26,6 +31,7 @@ SearchBarElements.propTypes = {
   phrase: propTypes.string.isRequired,
   onKeyUp: propTypes.func.isRequired,
   onClick: propTypes.func.isRequired,
+  onChange: propTypes.func.isRequired,
 }
 
 export default SearchBarElements

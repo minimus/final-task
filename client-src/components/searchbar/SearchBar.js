@@ -12,6 +12,7 @@ class SearchBar extends PureComponent {
           phrase={this.props.phrase}
           onClick={this.props.onClick}
           onKeyUp={this.props.onKeyUp}
+          onChange={this.props.onChange}
         />
         <Tooltip
           shown={this.props.tooltip}
@@ -26,6 +27,7 @@ SearchBar.propTypes = {
   phrase: propTypes.string.isRequired,
   onKeyUp: propTypes.func.isRequired,
   onClick: propTypes.func.isRequired,
+  onChange: propTypes.func.isRequired,
   tooltip: propTypes.bool.isRequired,
   onTooltipClick: propTypes.func.isRequired,
 }

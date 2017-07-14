@@ -24,9 +24,14 @@ export function trackSearchInput(event) {
     if (event.key === 'Enter') {
       const redirect = (phrase) ? `/search/${encodeURIComponent(phrase)}/1` : ''
       dispatch({ type: SEARCHBAR_TEXT_ENTERED, payload: { phrase, redirect } })
-    } else {
-      dispatch({ type: SEARCHBAR_TEXT_CHANGED, payload: phrase })
     }
+  }
+}
+
+export function trackSearchValue(event) {
+  return function (dispatch) {
+    const phrase = event.target.value
+    dispatch({ type: SEARCHBAR_TEXT_CHANGED, payload: phrase })
   }
 }
 

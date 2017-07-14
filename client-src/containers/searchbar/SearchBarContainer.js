@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import propTypes from 'prop-types'
-import { closeTooltip, trackSearchInput, searchButtonClicked, clearRedirect } from '../../redux/modules/searchbar'
+import { closeTooltip, trackSearchInput, searchButtonClicked, clearRedirect, trackSearchValue } from '../../redux/modules/searchbar'
 import SearchBar from '../../components/searchbar/SearchBar'
 
 class SearchBarContainer extends Component {
@@ -43,6 +43,7 @@ const mapDispatchToProps = {
   onTooltipClick: closeTooltip,
   onKeyUp: trackSearchInput,
   onClick: searchButtonClicked,
+  onChange: trackSearchValue,
   clearRedirect,
 }
 
