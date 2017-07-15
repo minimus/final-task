@@ -2,9 +2,13 @@ const express = require('express')
 
 const router = express.Router()
 
-async function getData(db, offer) {
+const wrap = fn => (...args) => fn(...args).catch(args[2])
+
+router.get('/:offer', wrap(async (req, res) => {
+  const offer = parseInt(req.params.offer, 10)
+  const db = req.app.locals.db
   const goods = db.collection('offers')
-  return {
+  res.json({
     status: true,
     data: await goods.findOne({ id: offer }, {
       id: 1,
@@ -28,19 +32,7 @@ async function getData(db, offer) {
       dimensions: 1,
       param: 1,
     }),
-  }
-}
-
-router.get('/:offer', (req, res, next) => {
-  const db = req.app.locals.db
-  const offer = parseInt(req.params.offer, 10)
-  getData(db, offer)
-    .then(data => res.json(data))
-    .catch((e) => {
-      const err = new Error(e)
-      err.status = 404
-      next(err)
-    })
-})
+  })
+}))
 
 module.exports = router

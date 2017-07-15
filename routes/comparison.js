@@ -2,25 +2,17 @@ const express = require('express')
 
 const router = express.Router()
 
-async function getData(db, ids) {
-  const goods = db.collection('offers')
-  return {
-    status: true,
-    data: await goods.find({ id: { $in: ids } }).toArray(),
-    params: await goods.distinct('param.name', { id: { $in: ids } }),
-  }
-}
+const wrap = fn => (...args) => fn(...args).catch(args[2])
 
-router.get('/:items', (req, res, next) => {
-  const db = req.app.locals.db
+router.get('/:items', wrap(async (req, res) => {
   const items = req.params.items.split('--').map(e => parseInt(e, 10))
-  getData(db, items)
-    .then(data => res.json(data))
-    .catch((e) => {
-      const err = new Error(e)
-      err.status = 404
-      next(err)
-    })
-})
+  const db = req.app.locals.db
+  const goods = db.collection('offers')
+  res.json({
+    status: true,
+    data: await goods.find({ id: { $in: items } }).toArray(),
+    params: await goods.distinct('param.name', { id: { $in: items } }),
+  })
+}))
 
 module.exports = router

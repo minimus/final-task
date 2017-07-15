@@ -2,11 +2,7 @@ const express = require('express')
 
 const router = express.Router()
 
-async function getMenuData(db) {
-  const cats = db.collection('categories')
-  const menu = await cats.find().toArray()
-  return menu
-}
+const wrap = fn => (...args) => fn(...args).catch(args[2])
 
 function getCats(data, rootNode) {
   const root = rootNode
@@ -20,19 +16,12 @@ function getCats(data, rootNode) {
   return root
 }
 
-router.get('/', (req, res, next) => {
+router.get('/', wrap(async (req, res) => {
+  const root = { id: 1132530, parentid: 0, keyValue: 'Электроника' }
   const db = req.app.locals.db
-  getMenuData(db)
-    .then((data) => {
-      const root = { id: 1132530, parentid: 0, keyValue: 'Электроника' }
-      const menuObj = getCats(data, root)
-      res.json(menuObj)
-    })
-    .catch((e) => {
-      const err = new Error(e)
-      err.status = 500
-      next(err)
-    })
-})
+  const cats = db.collection('categories')
+  const menu = getCats(await cats.find().toArray(), root)
+  res.json(menu)
+}))
 
 module.exports = router

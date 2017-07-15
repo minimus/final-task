@@ -2,6 +2,8 @@ const express = require('express')
 
 const router = express.Router()
 
+const wrap = fn => (...args) => fn(...args).catch(args[2])
+
 function prepareFilter(filter) {
   if (!filter) return []
 
@@ -31,7 +33,13 @@ function prepareFilter(filter) {
   return matches
 }
 
-async function getData(db, cat, page, offersOnPage, sort, filter) {
+router.get('/:category/:page', wrap(async (req, res) => {
+  const db = req.app.locals.db
+  const offersOnPage = req.app.locals.offersOnPage
+  const cat = parseInt(req.params.category, 10)
+  const page = parseInt(req.params.page, 10)
+  const sort = req.query.sort
+  const filter = req.query.filter
   const sortOrder = {}
   const skip = offersOnPage * (page - 1)
 
@@ -97,7 +105,8 @@ async function getData(db, cat, page, offersOnPage, sort, filter) {
 
   const goods = db.collection('offers')
   const cats = db.collection('categories')
-  return {
+
+  res.json({
     status: true,
     list: await goods.aggregate(aggregators).toArray(),
     count: await goods.aggregate(countAggergators).toArray(),
@@ -105,23 +114,7 @@ async function getData(db, cat, page, offersOnPage, sort, filter) {
     offersOnPage,
     categoryId: cat,
     category: await cats.findOne({ id: cat }),
-  }
-}
-
-router.get('/:category/:page', (req, res, next) => {
-  const db = req.app.locals.db
-  const offersOnPage = req.app.locals.offersOnPage
-  const cat = parseInt(req.params.category, 10)
-  const page = parseInt(req.params.page, 10)
-  const sort = req.query.sort
-  const filter = req.query.filter
-  getData(db, cat, page, offersOnPage, sort, filter)
-    .then(data => res.json(data))
-    .catch((e) => {
-      const err = new Error(e)
-      err.status = 404
-      next(err)
-    })
-})
+  })
+}))
 
 module.exports = router

@@ -2,6 +2,8 @@ const express = require('express')
 
 const router = express.Router()
 
+const wrap = fn => (...args) => fn(...args).catch(args[2])
+
 const exclude = [
   'Ширина упаковки',
   'Высота упаковки',
@@ -171,18 +173,23 @@ function prepareFilter(filter) {
   return matches
 }
 
-async function getData(db, cat, excluding, filter) {
+router.get('/:category', wrap(async (req, res) => {
+  const db = req.app.locals.db
+  const cat = parseInt(req.params.category, 10)
+  const filter = req.query.filter
+
   const matches = prepareFilter(filter)
 
   const goods = db.collection('offers')
-  return {
+
+  res.json({
     status: true,
     data: {
       facets: await goods.aggregate([
         { $match: { categoryid: cat } },
         ...matches,
         { $unwind: '$param' },
-        { $match: { 'param.name': { $nin: excluding } } },
+        { $match: { 'param.name': { $nin: exclude } } },
         { $group: { _id: '$param.name', values: { $addToSet: '$param.keyValue' } } },
         { $project: { _id: 0, facet: '$_id', field: { $literal: 'param' }, values: 1 } },
       ]).toArray(),
@@ -200,20 +207,7 @@ async function getData(db, cat, excluding, filter) {
         { $project: { _id: 0, facet: '$_id', field: { $literal: 'country_of_origin' }, values: 1 } },
       ]).toArray(),
     },
-  }
-}
-
-router.get('/:category', (req, res, next) => {
-  const db = req.app.locals.db
-  const cat = parseInt(req.params.category, 10)
-  const filter = req.query.filter
-  getData(db, cat, exclude, filter)
-    .then(data => res.json(data))
-    .catch((e) => {
-      const err = new Error(e)
-      err.status = 404
-      next(err)
-    })
-})
+  })
+}))
 
 module.exports = router

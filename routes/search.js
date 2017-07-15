@@ -2,6 +2,8 @@ const express = require('express')
 
 const router = express.Router()
 
+const wrap = fn => (...args) => fn(...args).catch(args[2])
+
 const include = [
   'Страна бренда',
   'Цвет',
@@ -39,7 +41,13 @@ function prepareFilter(filter) {
   return matches
 }
 
-async function getData(db, phrase, page, offersOnPage, including, filter) {
+router.get('/:phrase/:page', wrap(async (req, res) => {
+  const db = req.app.locals.db
+  const offersOnPage = req.app.locals.offersOnPage
+  const phrase = decodeURIComponent(req.params.phrase)
+  const page = parseInt(req.params.page, 10)
+  const filter = req.query.filter
+
   const skip = offersOnPage * (page - 1)
 
   const matches = prepareFilter(filter)
@@ -71,7 +79,7 @@ async function getData(db, phrase, page, offersOnPage, including, filter) {
     { $match: { $text: { $search: phrase } } },
     ...matches,
     { $unwind: '$param' },
-    { $match: { 'param.name': { $in: including } } },
+    { $match: { 'param.name': { $in: include } } },
     { $group: { _id: '$param.name', values: { $addToSet: '$param.keyValue' } } },
     { $project: { _id: 0, facet: '$_id', field: { $literal: 'param' }, values: 1 } },
   ]
@@ -94,7 +102,8 @@ async function getData(db, phrase, page, offersOnPage, including, filter) {
 
   const goods = db.collection('offers')
   const cats = db.collection('categories')
-  return {
+
+  res.json({
     data: await goods.aggregate(aggregator).toArray(),
     cats: await cats.find({}, { id: 1, keyValue: 1 }).toArray(),
     count: await goods.aggregate(countAggr).toArray(),
@@ -104,23 +113,7 @@ async function getData(db, phrase, page, offersOnPage, including, filter) {
     phrase,
     page,
     offersOnPage,
-  }
-}
-
-router.get('/:phrase/:page', (req, res, next) => {
-  const db = req.app.locals.db
-  const offersOnPage = req.app.locals.offersOnPage
-  const phrase = decodeURIComponent(req.params.phrase)
-  const page = parseInt(req.params.page, 10)
-  const filter = req.query.filter
-
-  getData(db, phrase, page, offersOnPage, include, filter)
-    .then(data => res.json(data))
-    .catch((e) => {
-      const err = new Error(e)
-      err.status = 404
-      next(err)
-    })
-})
+  })
+}))
 
 module.exports = router
