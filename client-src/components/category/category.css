@@ -62,20 +62,21 @@
   border-right: 1px solid #1574ad;
   border-left: 1px solid #1574ad;
   background: #ffffff;
+  transition: transform 800ms;
 }
 
 .compare-pane.shown {
   /*bottom: 0;*/
   transform: translateY(-100px);
-  animation-name: showPane;
-  animation-duration: 800ms;
+  /*animation-name: showPane;
+  animation-duration: 800ms;*/
 }
 
 .compare-pane.hided {
   /*bottom: -200px;*/
   transform: translateY(0);
-  animation-name: hidePane;
-  animation-duration: 800ms;
+  /*animation-name: hidePane;
+  animation-duration: 800ms;*/
 }
 
 .compare-pane-items {
