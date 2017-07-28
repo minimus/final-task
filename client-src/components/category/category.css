@@ -65,13 +65,15 @@
 }
 
 .compare-pane.shown {
-  bottom: 0;
+  /*bottom: 0;*/
+  transform: translateY(-100px);
   animation-name: showPane;
   animation-duration: 800ms;
 }
 
 .compare-pane.hided {
-  bottom: -200px;
+  /*bottom: -200px;*/
+  transform: translateY(0);
   animation-name: hidePane;
   animation-duration: 800ms;
 }
@@ -299,18 +301,22 @@ h1 .count {
 
 @keyframes hidePane {
   from {
-    bottom: 0;
+    /*bottom: 0;*/
+    transform: translateY(-100px);
   }
   to {
-    bottom: -100px;
+    /*bottom: -100px;*/
+    transform: translateY(0);
   }
 }
 
 @keyframes showPane {
   from {
-    bottom: -100px;
+    /*bottom: -100px;*/
+    transform: translateY(0);
   }
   to {
-    bottom: 0;
+    /*bottom: 0;*/
+    transform: translateY(-100px);
   }
 }
