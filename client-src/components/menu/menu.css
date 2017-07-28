@@ -98,13 +98,15 @@ div#menu ul li a:hover {
 }
 
 div#menu ul.shown {
-  left: 0;
+  /*left: 0;*/
+  transform: translateX(1000px);
   animation-duration: 1s;
   animation-name: shown;
 }
 
 div#menu ul.hided {
-  left: -1000px;
+  /*left: -1000px;*/
+  transform: translateX(0);
   animation-duration: 1s;
   animation-name: hided;
 }
@@ -217,18 +219,22 @@ div#menu ul.hided {
 
 @keyframes shown {
   from {
-    left: -1000px;
+    /*left: -1000px;*/
+    transform: translateX(0);
   }
   to {
-    left: 0;
+    /*left: 0;*/
+    transform: translateX(1000px);
   }
 }
 
 @keyframes hided {
   from {
-    left: 0;
+    /*left: 0;*/
+    transform: translateX(1000px);
   }
   to {
-    left: -1000px;
+    /*left: -1000px;*/
+    transform: translateX(0);
   }
 }
