@@ -7,9 +7,11 @@ import PreviewPane from './PreviewPane'
 
 class PreviewDialog extends PureComponent {
   render() {
-    const dialogStyle = { display: (this.props.show) ? 'block' : 'none' }
+    // const dialogStyle = { display: (this.props.show) ? 'block' : 'none' }
+    const dialogClass = (this.props.show) ? 'shown' : 'hided'
+    // if (!this.props.show) return null
     return (
-      <div id="preview-dialog" style={dialogStyle}>
+      <div id="preview-dialog" className={dialogClass}>
         <DialogCaption onClose={this.props.onClose} />
         <div id="dialog-inline">
           <PrevButton onClick={this.props.onNavClick} />

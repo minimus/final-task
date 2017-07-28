@@ -76,6 +76,20 @@
   transform: translate(-50%, -50%);
   box-shadow: 0 0 10px 2px rgba(0,0,0,.15);
   border-radius: 3px;
+  opacity: 0;
+  /*transition: opacity 2s;*/
+}
+
+#preview-dialog.shown {
+  display: block;
+  opacity: 1;
+  animation-name: dlgShow;
+  animation-duration: 700ms;
+}
+
+#preview-dialog.hided {
+  display: none;
+  /*opacity: 0;*/
 }
 
 #preview-dialog #dialog-caption {
@@ -287,5 +301,15 @@
 
 #description p {
   text-align: justify;
+}
+
+@keyframes dlgShow {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
