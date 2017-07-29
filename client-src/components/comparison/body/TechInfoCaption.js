@@ -1,18 +1,10 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import propTypes from 'prop-types'
 
-class TechInfoCaption extends PureComponent {
-  render() {
-    return (
-      <div className="tech-info-cell info-caption">
-        {this.props.text}
-      </div>
-    )
-  }
+export default function TechInfoCaption({ text }) {
+  return <div className="tech-info-cell info-caption">{text}</div>
 }
 
 TechInfoCaption.propTypes = {
   text: propTypes.string.isRequired,
 }
-
-export default TechInfoCaption

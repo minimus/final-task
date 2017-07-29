@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import propTypes from 'prop-types'
 import SearchItem from './SearchItem'
 import Pager from '../../pager/Pager'
 
-class SearchItems extends PureComponent {
+class SearchItems extends Component {
   getPhrase() {
     return encodeURIComponent(this.props.phrase)
   }

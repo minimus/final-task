@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import propTypes from 'prop-types'
 import { CategoryElementsWithLoadingBar } from './CategoryElements'
 import './category.css'
 
-class Category extends PureComponent {
+class Category extends Component {
   isLoading = () => (!this.props.data || !this.props.facets)
 
   render() {

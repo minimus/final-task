@@ -1,12 +1,12 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import propTypes from 'prop-types'
 import WithLoadingBar from '../WithLoadingBar'
 import LoadingBar from '../LoadingBar'
-import OfferMainPane from './main'
-import OfferDetailsPane from './details'
-import PreviewDialog from './main/dialog'
+import OfferMainPane from './main/OfferMainPane'
+import OfferDetailsPane from './details/OfferDetailsPane'
+import PreviewDialog from './main/dialog/PreviewDialog'
 
-class OfferElements extends PureComponent {
+class OfferElements extends Component {
   render() {
     return (
       <section className="offer container">

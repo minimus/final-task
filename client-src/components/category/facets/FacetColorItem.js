@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import classNames from 'classnames'
 import propTypes from 'prop-types'
 
@@ -37,27 +37,25 @@ const colors = [
   { name: 'темно-коричневый', value: '#654321' },
 ]
 
-class FacetColorItem extends PureComponent {
-  render() {
-    const itemStyle = {
-      background: colors.find(e => e.name === this.props.value).value,
-    }
-    const classSelected = (this.props.selected) ? 'selected' : ''
-    return (
-      <button
-        id={this.props.id}
-        className={classNames(classSelected, 'facet-item', 'color-item')}
-        style={itemStyle}
-        title={this.props.value}
-        data-field={this.props.field}
-        data-name={this.props.name}
-        data-value={this.props.value}
-        onClick={this.props.onChange}
-      >
-        {' '}
-      </button>
-    )
+export default function FacetColorItem({ id, name, value, field, selected, onChange }) {
+  const itemStyle = {
+    background: colors.find(e => e.name === value).value,
   }
+  const classSelected = (selected) ? 'selected' : ''
+  return (
+    <button
+      id={id}
+      className={classNames(classSelected, 'facet-item', 'color-item')}
+      style={itemStyle}
+      title={value}
+      data-field={field}
+      data-name={name}
+      data-value={value}
+      onClick={onChange}
+    >
+      {' '}
+    </button>
+  )
 }
 
 FacetColorItem.propTypes = {
@@ -68,5 +66,3 @@ FacetColorItem.propTypes = {
   selected: propTypes.bool.isRequired,
   onChange: propTypes.func.isRequired,
 }
-
-export default FacetColorItem

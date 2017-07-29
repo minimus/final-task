@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import propTypes from 'prop-types'
 import PagerButtonsFirstPane from './PagerButtonsFirstPane'
 import PagerButtonsOnePane from './PagerButtonsOnePane'
@@ -6,7 +6,7 @@ import PagerButtonsTwoPane from './PagerButtonsTwoPane'
 import PagerButtonsThreePane from './PagerButtonsThreePane'
 import PagerButtonsLastPane from './PagerButtonsLastPane'
 
-class PagerButtons extends PureComponent {
+class PagerButtons extends Component {
   getButtonsPane = () => {
     if (this.props.pages <= 8) {
       return (

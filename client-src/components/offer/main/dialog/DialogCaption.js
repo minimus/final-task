@@ -1,20 +1,16 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import propTypes from 'prop-types'
 
-class DialogCaption extends PureComponent {
-  render() {
-    return (
-      <div id="dialog-caption">
-        <button className="close-button" onClick={this.props.onClose}>
-          <i className="material-icons md-36">close</i>
-        </button>
-      </div>
-    )
-  }
+export default function DialogCaption({ onClose }) {
+  return (
+    <div id="dialog-caption">
+      <button className="close-button" onClick={onClose}>
+        <i className="material-icons md-36">close</i>
+      </button>
+    </div>
+  )
 }
 
 DialogCaption.propTypes = {
   onClose: propTypes.func.isRequired,
 }
-
-export default DialogCaption

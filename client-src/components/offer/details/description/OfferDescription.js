@@ -1,19 +1,15 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import propTypes from 'prop-types'
 
-class OfferDescription extends PureComponent {
-  render() {
-    return (
-      <section id="description">
-        <h3>Описание</h3>
-        <p>{this.props.description}</p>
-      </section>
-    )
-  }
+export default function OfferDescription({ description }) {
+  return (
+    <section id="description">
+      <h1>Описание</h1>
+      <p>{description}</p>
+    </section>
+  )
 }
 
 OfferDescription.propTypes = {
   description: propTypes.string.isRequired,
 }
-
-export default OfferDescription

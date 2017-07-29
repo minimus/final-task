@@ -1,11 +1,11 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import propTypes from 'prop-types'
 import OffersList from './OffersList'
 import Header from './header/Header'
 import Pager from '../../pager/Pager'
 import SortOrderPane from './sort/SortOrderPane'
 
-class OffersSection extends PureComponent {
+class OffersSection extends Component {
   getTitle = () => (this.props.category.keyValue)
 
   render() {

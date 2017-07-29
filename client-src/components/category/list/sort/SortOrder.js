@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import propTypes from 'prop-types'
 
-class SortOrder extends PureComponent {
+class SortOrder extends Component {
   sortOptions = () => [
       ['no', 'без сортировки'],
       ['priceMin', 'по возрастанию цены'],

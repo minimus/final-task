@@ -1,11 +1,11 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import propTypes from 'prop-types'
 import WithLoadingBar from '../WithLoadingBar'
 import ComparisonTable from './ComparisonTable'
 import ComparisonHeader from './ComparisonHeader'
 import LoadingBar from '../LoadingBar'
 
-class ComparisonElements extends PureComponent {
+class ComparisonElements extends Component {
   constructor(props) {
     super(props)
     this.names = this.props.data.map(e => e.name)

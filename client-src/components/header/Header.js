@@ -1,8 +1,8 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import MenuContainer from '../../containers/menu'
-import Breadcrumbs from '../../containers/breadcrumbs'
-import SearchBar from '../../containers/searchbar'
+import MenuContainer from '../../containers/menu/MenuContainer'
+import Breadcrumbs from '../../containers/breadcrumbs/BreadcrumbsContainer'
+import SearchBar from '../../containers/searchbar/SearchBarContainer'
 import './header.css'
 
 export default function () {

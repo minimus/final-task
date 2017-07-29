@@ -1,3 +1,7 @@
+section.offer.container h1 {
+  font-size: 18px;
+}
+
 .offer-main-pane, .offer-details-pane {
   display: flex;
   flex-direction: row;
@@ -286,6 +290,7 @@
 
 #link a:hover {
   color: #f2fd5c;
+  text-shadow: 0 0 3px rgba(236, 233, 118, 0.82);
 }
 
 #description {

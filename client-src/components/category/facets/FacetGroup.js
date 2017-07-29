@@ -1,50 +1,48 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import propTypes from 'prop-types'
 import FacetItem from './FacetItem'
 import FacetColorItem from './FacetColorItem'
 
-class FacetGroup extends PureComponent {
-  render() {
-    return (
-      <div className="facet-group">
-        <span className="facet-group-caption">
-          {this.props.facet.facet}
-        </span>
-        <span className="facet-group-container">
-          {this.props.facet.values.map((e, i) => {
-            const selected = !!this.props.selectedFacets.find(el =>
-            (el.field === this.props.facet.field &&
-            el.name === this.props.facet.facet &&
+export default function FacetGroup({ facet, selectedFacets, onChange }) {
+  return (
+    <div className="facet-group">
+      <span className="facet-group-caption">
+        {facet.facet}
+      </span>
+      <span className="facet-group-container">
+        {facet.values.map((e, i) => {
+          const selected = !!selectedFacets.find(el =>
+            (el.field === facet.field &&
+            el.name === facet.facet &&
             el.value === e))
-            const idx = `${this.props.facet.id}_${i}`
-            if (this.props.facet.view === 'color') {
-              return (
-                <FacetColorItem
-                  id={idx}
-                  name={this.props.facet.facet}
-                  value={e}
-                  field={this.props.facet.field}
-                  selected={selected}
-                  onChange={this.props.onChange}
-                  key={idx}
-                />
-              )
-            }
+          const idx = `${facet.id}_${i}`
+          if (facet.view === 'color') {
             return (
-              <FacetItem
+              <FacetColorItem
                 id={idx}
-                name={this.props.facet.facet}
+                name={facet.facet}
                 value={e}
-                field={this.props.facet.field}
+                field={facet.field}
                 selected={selected}
-                onChange={this.props.onChange}
+                onChange={onChange}
                 key={idx}
-              />)
-          })}
-        </span>
-      </div>
-    )
-  }
+              />
+            )
+          }
+          return (
+            <FacetItem
+              id={idx}
+              name={facet.facet}
+              value={e}
+              field={facet.field}
+              selected={selected}
+              onChange={onChange}
+              key={idx}
+            />)
+        })}
+      </span>
+    </div>
+  )
 }
 
 FacetGroup.propTypes = {
@@ -52,5 +50,3 @@ FacetGroup.propTypes = {
   selectedFacets: propTypes.arrayOf(propTypes.object).isRequired,
   onChange: propTypes.func.isRequired,
 }
-
-export default FacetGroup

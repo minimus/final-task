@@ -1,24 +1,16 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import propTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 
-class BreadcrumbsItem extends PureComponent {
-  render() {
-    if (this.props.last) {
-      return (
-        <span id={this.props.id} className="breadcrumbs-item">
-          {this.props.name}
-        </span>
-      )
-    }
-    return (
-      <span id={this.props.id} className="breadcrumbs-item">
-        <NavLink exact to={this.props.link}>
-          {this.props.name}
-        </NavLink>
-      </span>
-    )
+export default function BreadcrumbsItem({ id, link, name, last }) {
+  if (last) {
+    return <span id={id} className="breadcrumbs-item">{name}</span>
   }
+  return (
+    <span id={id} className="breadcrumbs-item">
+      <NavLink exact to={link}>{name}</NavLink>
+    </span>
+  )
 }
 
 BreadcrumbsItem.propTypes = {
@@ -27,5 +19,3 @@ BreadcrumbsItem.propTypes = {
   name: propTypes.string.isRequired,
   last: propTypes.bool.isRequired,
 }
-
-export default BreadcrumbsItem

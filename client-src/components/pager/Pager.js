@@ -1,21 +1,19 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import propTypes from 'prop-types'
 import PagerButtons from './PagerButtons'
 import './pager.css'
 
-class Pager extends PureComponent {
-  render() {
-    return (
-      <nav id="pager" className="pager-container">
-        <PagerButtons
-          base={this.props.base}
-          category={this.props.category}
-          page={this.props.page}
-          pages={this.props.pages}
-        />
-      </nav>
-    )
-  }
+export default function Pager({ base, category, page, pages }) {
+  return (
+    <nav id="pager" className="pager-container">
+      <PagerButtons
+        base={base}
+        category={category}
+        page={page}
+        pages={pages}
+      />
+    </nav>
+  )
 }
 
 Pager.propTypes = {
@@ -24,5 +22,3 @@ Pager.propTypes = {
   page: propTypes.number.isRequired,
   pages: propTypes.number.isRequired,
 }
-
-export default Pager

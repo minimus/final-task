@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import propTypes from 'prop-types'
 import { fetchComparisonData } from '../../redux/modules/comparison'
-import Compare from '../../components/comparison'
+import Compare from '../../components/comparison/Comparison'
 import P404 from '../../components/p404/P404'
 
 class ComparisonContainer extends Component {

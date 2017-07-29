@@ -1,30 +1,26 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import propTypes from 'prop-types'
 import DialogCaption from './DialogCaption'
 import PrevButton from './PrevButton'
 import NextButton from './NextButton'
 import PreviewPane from './PreviewPane'
 
-class PreviewDialog extends PureComponent {
-  render() {
-    // const dialogStyle = { display: (this.props.show) ? 'block' : 'none' }
-    const dialogClass = (this.props.show) ? 'shown' : 'hided'
-    // if (!this.props.show) return null
-    return (
-      <div id="preview-dialog" className={dialogClass}>
-        <DialogCaption onClose={this.props.onClose} />
-        <div id="dialog-inline">
-          <PrevButton onClick={this.props.onNavClick} />
-          <PreviewPane
-            pictures={this.props.pictures}
-            selected={this.props.selected}
-            onClick={this.props.onClick}
-          />
-          <NextButton onClick={this.props.onNavClick} />
-        </div>
+export default function PreviewDialog({ pictures, selected, show, onClick, onClose, onNavClick }) {
+  const dialogClass = (show) ? 'shown' : 'hided'
+  return (
+    <div id="preview-dialog" className={dialogClass}>
+      <DialogCaption onClose={onClose} />
+      <div id="dialog-inline">
+        <PrevButton onClick={onNavClick} />
+        <PreviewPane
+          pictures={pictures}
+          selected={selected}
+          onClick={onClick}
+        />
+        <NextButton onClick={onNavClick} />
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 PreviewDialog.propTypes = {
@@ -35,5 +31,3 @@ PreviewDialog.propTypes = {
   onClose: propTypes.func.isRequired,
   onNavClick: propTypes.func.isRequired,
 }
-
-export default PreviewDialog

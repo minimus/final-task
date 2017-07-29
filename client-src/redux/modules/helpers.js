@@ -54,7 +54,7 @@ export function prepareFacets(data) {
   const out = [...data.vendor, ...data.country, ...majorFacets, ...facets]
 
   out.reduce((prev, cur) => {
-    if (!cur.facet.match(/\d{4}-\d{2}-\d{2}[tT]\d{2}:\d{2}:\d{2}.\d{3}[zZ]/)) prev.push(cur)
+    if (!/\d{4}-\d{2}-\d{2}[tT]\d{2}:\d{2}:\d{2}.\d{3}[zZ]/.test(cur.facet)) prev.push(cur)
     return prev
   }, [])
 
@@ -63,7 +63,7 @@ export function prepareFacets(data) {
     out[i].view = (out[i].facet === 'Цвет') ? 'color' : 'standard'
 
     out[i].values = out[i].values.reduce((prev, cur) => {
-      if (typeof cur !== 'string' || !cur.match(/\d{4}-\d{2}-\d{2}[tT]\d{2}:\d{2}:\d{2}.\d{3}[zZ]/)) { prev.push(cur) }
+      if (typeof cur !== 'string' || !/\d{4}-\d{2}-\d{2}[tT]\d{2}:\d{2}:\d{2}.\d{3}[zZ]/.test(cur)) { prev.push(cur) }
       return prev
     }, [])
   }
@@ -72,10 +72,11 @@ export function prepareFacets(data) {
 }
 
 export function removeGarbage(items = []) {
+  if (!items) return []
   const out = []
 
   items.forEach((val) => {
-    if (!val.match(/\d{4}-\d{2}-\d{2}[tT]\d{2}:\d{2}:\d{2}.\d{3}[zZ]/)) { out.push(val) }
+    if (!/\d{4}-\d{2}-\d{2}[tT]\d{2}:\d{2}:\d{2}.\d{3}[zZ]/.test(val)) { out.push(val) }
   })
 
   return out
