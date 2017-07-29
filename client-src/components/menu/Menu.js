@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import propTypes from 'prop-types'
 import MenuButton from './MenuButton'
 import MenuBar from './MenuBar'
@@ -6,7 +6,7 @@ import withLoadingBar from '../WithLoadingBar'
 import MenuTooltip from './MenuTooltip'
 import './menu.css'
 
-class Menu extends PureComponent {
+class Menu extends Component {
   constructor(props) {
     super(props)
     this.bars = []
