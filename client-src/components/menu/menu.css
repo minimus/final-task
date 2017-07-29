@@ -98,17 +98,13 @@ div#menu ul li a:hover {
 }
 
 div#menu ul.shown {
-  /*left: 0;*/
   transform: translateX(1000px);
-  animation-duration: 1s;
-  animation-name: shown;
+  transition: transform 1s;
 }
 
 div#menu ul.hided {
-  /*left: -1000px;*/
   transform: translateX(0);
-  animation-duration: 1s;
-  animation-name: hided;
+  transition: transform 1s;
 }
 
 .material-icons {
@@ -215,26 +211,4 @@ div#menu ul.hided {
 .menu-tooltip-body .material-icons {
   color: #ffffff;
   cursor: pointer;
-}
-
-@keyframes shown {
-  from {
-    /*left: -1000px;*/
-    transform: translateX(0);
-  }
-  to {
-    /*left: 0;*/
-    transform: translateX(1000px);
-  }
-}
-
-@keyframes hided {
-  from {
-    /*left: 0;*/
-    transform: translateX(1000px);
-  }
-  to {
-    /*left: -1000px;*/
-    transform: translateX(0);
-  }
 }
