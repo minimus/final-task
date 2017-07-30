@@ -14,57 +14,63 @@ section.offer.container h1 {
 .offer-main-pane .offer-preview {
   display: grid;
   grid-template-columns: 400px;
-  grid-template-rows: 400px 50px;
+  grid-template-rows: 400px auto;
   grid-row-gap: 5px;
   justify-items: center;
   align-items: center;
+/*display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;*/
 }
 
 .offer-main-pane .image-preview-container {
-  align-self: center;
-  background-color: transparent;
-  border: 0;
-  cursor: zoom-in;
+align-self: center;
+background-color: transparent;
+border: 0;
+cursor: zoom-in;
 }
 
 .offer-main-pane .image-preview-container:focus {
-  outline: none;
+outline: none;
 }
 
 .offer-main-pane .image-preview {
-  max-height: 350px;
-  max-width: 350px;
-  margin: 10px;
+max-height: 350px;
+max-width: 350px;
+margin: 10px;
 }
 
 .offer-main-pane .thumbnails {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+display: flex;
+flex-direction: row;
+justify-content: center;
+flex-wrap: wrap;
+max-width: 360px;
 }
 
 .offer-main-pane .thumbnails img {
-  max-width: 35px;
-  max-height: 35px;
+max-width: 35px;
+max-height: 35px;
 }
 
 .offer-main-pane .thumbnails .thumbnail-container {
-  width: 40px;
-  height: 40px;
-  margin: 5px;
-  padding: 1px;
-  background-color: #ffffff;
-  text-align: center;
-  border: 1px solid #dedede;
-  cursor: pointer;
+width: 40px;
+height: 40px;
+margin: 5px;
+padding: 1px;
+background-color: #ffffff;
+text-align: center;
+border: 1px solid #dedede;
+cursor: pointer;
 }
 
 .offer-main-pane .thumbnails .thumbnail-container:focus {
-  outline: none;
+outline: none;
 }
 
 .offer-main-pane .thumbnails .thumbnail-container.selected {
-  border: 1px solid #1574AD;
+border: 1px solid #1574AD;
 }
 
 /* Preview dialog */
@@ -306,6 +312,18 @@ section.offer.container h1 {
 
 #description p {
   text-align: justify;
+}
+
+@media screen and (max-width: 1190px) {
+  #description, #detail-info {
+    max-width: 90%;
+    flex-grow: 1;
+  }
+
+  #detail-info .info-cell {
+    max-width: inherit;
+    min-width: 300px;
+  }
 }
 
 @keyframes dlgShow {

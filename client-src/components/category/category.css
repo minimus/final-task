@@ -233,6 +233,10 @@ h1 .count {
   flex-wrap: wrap;
 }
 
+#offers-section {
+  flex-grow: 1;
+}
+
 .offer-item {
   width: 240px;
   height: 390px;
