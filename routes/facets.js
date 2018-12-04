@@ -174,9 +174,9 @@ function prepareFilter(filter) {
 }
 
 router.get('/:category', wrap(async (req, res) => {
-  const db = req.app.locals.db
+  const { db } = req.app.locals
   const cat = parseInt(req.params.category, 10)
-  const filter = req.query.filter
+  const { filter } = req.query
 
   const matches = prepareFilter(filter)
 
