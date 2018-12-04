@@ -34,12 +34,10 @@ function prepareFilter(filter) {
 }
 
 router.get('/:category/:page', wrap(async (req, res) => {
-  const db = req.app.locals.db
-  const offersOnPage = req.app.locals.offersOnPage
+  const { db, offersOnPage } = req.app.locals
   const cat = parseInt(req.params.category, 10)
   const page = parseInt(req.params.page, 10)
-  const sort = req.query.sort
-  const filter = req.query.filter
+  const { sort, filter } = req.query
   const sortOrder = {}
   const skip = offersOnPage * (page - 1)
 
