@@ -60,8 +60,7 @@
     "uglify-js": "^3.0.24",
     "uglifyjs-webpack-plugin": "^0.4.6",
     "url-loader": "^0.5.9",
-    "webpack": "^2.7.0",
-    "webpack-dev-server": "^2.5.1"
+    "webpack": "^2.7.0"
   },
   "moduleDirectories": [
     "node_modules",
